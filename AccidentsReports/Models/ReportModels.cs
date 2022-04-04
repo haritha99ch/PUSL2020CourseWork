@@ -16,6 +16,7 @@ namespace AccidentsReports.Models {
     }
     public class ReportDetail:Report {
         public string Cause { get; set; }
+        public List<Vehicle> Vehicles { get; set; }
         public string ApprovedBy { get; set; }
         public string DamageEstimatedBy { get; set; }
         public string ClaimedBy { get; set; }

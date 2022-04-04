@@ -43,14 +43,14 @@ namespace AccidentsReports.Models {
         [Required]
         [Display(Name = "Address")]
         public string Address { get; set; }
-        //TODO: public List<Report> Reports { get; set; }
+        public List<Report>? Reports { get; set; }
     }
 
     public class Driver:User {
         [Required]
         [Display(Name = "Licence Number")]
         public int LicenceNumber { get; set; }
-        //TODO: public List<Vehical> Vehicals { get; set; }
+        public List<Vehicle> Vehicles { get; set; }
     }
 
     public class Police:User {
