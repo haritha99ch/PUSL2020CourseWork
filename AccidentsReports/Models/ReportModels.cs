@@ -4,8 +4,6 @@ using System.Linq;
 using System.Web;
 
 namespace AccidentsReports.Models {
-    public class ReportModels {
-    }
     public abstract class Report {
         public int Id { get; set; }
         public string Title { get; set; }
