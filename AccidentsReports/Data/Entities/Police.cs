@@ -8,6 +8,7 @@ using System.Web;
 namespace AccidentsReports.Data.Entities {
     public class Police {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int PoliceId { get; set; }
         [ForeignKey("User")]
         public int NIC { get; set; }

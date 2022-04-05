@@ -8,6 +8,7 @@ using System.Web;
 namespace AccidentsReports.Data.Entities {
     public class RDA {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int EmployeeId { get; set; }
         [ForeignKey("User")]
         public int NIC { get; set; }
