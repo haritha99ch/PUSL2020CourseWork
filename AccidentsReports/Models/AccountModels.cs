@@ -23,14 +23,13 @@ namespace AccidentsReports.Models {
                 return _age;
             }
         }
-        private DateTime _dOB { get; set; }
         [Required]
         [Display(Name = "Date Of Birth")]
         public DateTime DOB {
-            get => _dOB;
+            get => DOB;
             set {
-                _dOB = value;
                 _age = DateTime.Now.Year - value.Year;
+                DOB = value;
             }
         }
         [Required]
