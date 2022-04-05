@@ -18,5 +18,9 @@ namespace AccidentsReports.Data {
         public DbSet<Image> Images { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Report> Reports { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder) {
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

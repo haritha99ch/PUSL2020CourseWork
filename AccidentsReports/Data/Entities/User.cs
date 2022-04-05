@@ -17,15 +17,7 @@ namespace AccidentsReports.Data.Entities {
         [Required]
         public string Gender { get; set; }
         [Required]
-        public int Age { get; private set; }
-        [Required]
-        public DateTime DOB {
-            get => DOB;
-            set {
-                Age=DateTime.Now.Year - value.Year;
-                DOB=value;
-            }
-        }
+        public DateTime DOB { get; set; }
         [Required]
         public int PhoneNumber { get; set; }
         [Required]
