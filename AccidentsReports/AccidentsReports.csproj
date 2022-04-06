@@ -143,9 +143,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202204051820544_CreateTables.cs" />
-    <Compile Include="Migrations\202204051820544_CreateTables.designer.cs">
-      <DependentUpon>202204051820544_CreateTables.cs</DependentUpon>
+    <Compile Include="Migrations\202204051838580_CreateTabls.cs" />
+    <Compile Include="Migrations\202204051838580_CreateTabls.designer.cs">
+      <DependentUpon>202204051838580_CreateTabls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204051943502_AddCause.cs" />
+    <Compile Include="Migrations\202204051943502_AddCause.designer.cs">
+      <DependentUpon>202204051943502_AddCause.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
@@ -224,6 +228,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\DriverAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -234,8 +239,11 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202204051820544_CreateTables.resx">
-      <DependentUpon>202204051820544_CreateTables.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202204051838580_CreateTabls.resx">
+      <DependentUpon>202204051838580_CreateTabls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204051943502_AddCause.resx">
+      <DependentUpon>202204051943502_AddCause.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

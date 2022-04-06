@@ -8,12 +8,11 @@
 @using (Html.BeginForm("Login", "Account",
     new { ReturnUrl = Request.QueryString["ReturnUrl"] },
     FormMethod.Post)) {
-
-    <h2>@ViewBag.Email</h2>
-    <h2>@ViewBag.Password</h2>
-
-
-
+    if (IsPost) {
+        <div class="alert alert-danger">
+            Invalid Login
+        </div>
+    }
     @Html.LabelFor(model => model.Email)
     <br />
     @Html.TextBoxFor(model => model.Email)

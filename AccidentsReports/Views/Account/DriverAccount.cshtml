@@ -1,24 +1,16 @@
 ﻿@model AccidentsReports.Models.Driver
 
 @{
-    ViewBag.Title = "Account";
+    ViewBag.Title = "DriverAccount";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Account</h2>
+<h2>DriverAccount</h2>
 
 <div>
     <h4>Driver</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
@@ -97,3 +89,37 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+@foreach (var item in ViewBag.Reports) {
+    <p>
+        <label class="d-inline-block">Title</label>
+        <label class="d-inline-block">@item.Title</label>
+    </p>
+    <p>
+        <label class="d-inline-block">Author</label>
+        <label class="d-inline-block">@item.Author</label>
+    </p>
+    <p>
+        <label class="d-inline-block">ApprovedBy</label>
+        <label class="d-inline-block">@item.ApprovedBy</label>
+    </p>
+    <p>
+        <label class="d-inline-block">Category</label>
+        <label class="d-inline-block">@item.Category</label>
+    </p>
+    <p>
+        <label class="d-inline-block">Cause</label>
+        <label class="d-inline-block">@item.Cause</label>
+    </p>
+    
+    <p>
+        <label class="d-inline-block">ClaimedBy</label>
+        <label class="d-inline-block">@item.ClaimedBy</label>
+    </p>
+    
+    <p>
+        <label class="d-inline-block">Description</label>
+        <label class="d-inline-block">@item.Description</label>
+    </p>
+
+}
