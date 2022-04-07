@@ -10,12 +10,10 @@ namespace AccidentsReports.Models {
         [Display(Name ="Plate Number")]
         public int PlateNumber { get; set; }
         [Display(Name = "Model Number")]
-        public string? ModelNumber { get; set; }
-        [Display(Name = "Model Name")]
         public string? ModelName { get; set; }
         [Required]
-        [Display(Name = "Vehicle Type")]
-        public string Type { get; set; }
+        [Display(Name = "Vehicle Class")]
+        public string Class { get; set; }
         [Display(Name = "Licence Number")]
         public int? LicenceNumber { get; set; }
     }

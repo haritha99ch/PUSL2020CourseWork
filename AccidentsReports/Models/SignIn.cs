@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 
 namespace AccidentsReports.Models {
-    public class Login {
+    public class SignIn {
         [Required]
         [EmailAddress]
         [Display(Name ="Email Address")]

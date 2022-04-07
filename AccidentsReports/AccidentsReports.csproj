@@ -129,7 +129,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Data\ARDbContext.cs" />
     <Compile Include="Data\Entities\Account.cs" />
     <Compile Include="Data\Entities\Driver.cs" />
@@ -138,22 +137,111 @@
     <Compile Include="Data\Entities\Police.cs" />
     <Compile Include="Data\Entities\RDA.cs" />
     <Compile Include="Data\Entities\Report.cs" />
+    <Compile Include="Data\Entities\ReportMeta.cs" />
     <Compile Include="Data\Entities\User.cs" />
     <Compile Include="Data\Entities\Vehicle.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202204051838580_CreateTabls.cs" />
-    <Compile Include="Migrations\202204051838580_CreateTabls.designer.cs">
-      <DependentUpon>202204051838580_CreateTabls.cs</DependentUpon>
+    <Compile Include="Migrations\202204070400296_User.cs" />
+    <Compile Include="Migrations\202204070400296_User.designer.cs">
+      <DependentUpon>202204070400296_User.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202204051943502_AddCause.cs" />
-    <Compile Include="Migrations\202204051943502_AddCause.designer.cs">
-      <DependentUpon>202204051943502_AddCause.cs</DependentUpon>
+    <Compile Include="Migrations\202204070403403_Account.cs" />
+    <Compile Include="Migrations\202204070403403_Account.designer.cs">
+      <DependentUpon>202204070403403_Account.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204070407299_UserAccount.cs" />
+    <Compile Include="Migrations\202204070407299_UserAccount.designer.cs">
+      <DependentUpon>202204070407299_UserAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204070409467_Image.cs" />
+    <Compile Include="Migrations\202204070409467_Image.designer.cs">
+      <DependentUpon>202204070409467_Image.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204070410431_AccountImage.cs" />
+    <Compile Include="Migrations\202204070410431_AccountImage.designer.cs">
+      <DependentUpon>202204070410431_AccountImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204070413587_Driver.cs" />
+    <Compile Include="Migrations\202204070413587_Driver.designer.cs">
+      <DependentUpon>202204070413587_Driver.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204070415156_UserDriver.cs" />
+    <Compile Include="Migrations\202204070415156_UserDriver.designer.cs">
+      <DependentUpon>202204070415156_UserDriver.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204070417594_Vehicle.cs" />
+    <Compile Include="Migrations\202204070417594_Vehicle.designer.cs">
+      <DependentUpon>202204070417594_Vehicle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204070419326_VehicleDriver.cs" />
+    <Compile Include="Migrations\202204070419326_VehicleDriver.designer.cs">
+      <DependentUpon>202204070419326_VehicleDriver.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204070421209_Police.cs" />
+    <Compile Include="Migrations\202204070421209_Police.designer.cs">
+      <DependentUpon>202204070421209_Police.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204070423573_UserPolice.cs" />
+    <Compile Include="Migrations\202204070423573_UserPolice.designer.cs">
+      <DependentUpon>202204070423573_UserPolice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204070425002_RDA.cs" />
+    <Compile Include="Migrations\202204070425002_RDA.designer.cs">
+      <DependentUpon>202204070425002_RDA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204070425586_UserRDA.cs" />
+    <Compile Include="Migrations\202204070425586_UserRDA.designer.cs">
+      <DependentUpon>202204070425586_UserRDA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204070427576_Insurance.cs" />
+    <Compile Include="Migrations\202204070427576_Insurance.designer.cs">
+      <DependentUpon>202204070427576_Insurance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204070429405_UserInsurance.cs" />
+    <Compile Include="Migrations\202204070429405_UserInsurance.designer.cs">
+      <DependentUpon>202204070429405_UserInsurance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204070434019_Report.cs" />
+    <Compile Include="Migrations\202204070434019_Report.designer.cs">
+      <DependentUpon>202204070434019_Report.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204070435137_DriverReport.cs" />
+    <Compile Include="Migrations\202204070435137_DriverReport.designer.cs">
+      <DependentUpon>202204070435137_DriverReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204070436365_PoliceReport.cs" />
+    <Compile Include="Migrations\202204070436365_PoliceReport.designer.cs">
+      <DependentUpon>202204070436365_PoliceReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204070437590_RDAReport.cs" />
+    <Compile Include="Migrations\202204070437590_RDAReport.designer.cs">
+      <DependentUpon>202204070437590_RDAReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204070440382_InsuranceReport.cs" />
+    <Compile Include="Migrations\202204070440382_InsuranceReport.designer.cs">
+      <DependentUpon>202204070440382_InsuranceReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204070513163_VehicleReport.cs" />
+    <Compile Include="Migrations\202204070513163_VehicleReport.designer.cs">
+      <DependentUpon>202204070513163_VehicleReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204070519083_ReportImage.cs" />
+    <Compile Include="Migrations\202204070519083_ReportImage.designer.cs">
+      <DependentUpon>202204070519083_ReportImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204070522470_ReportMeta.cs" />
+    <Compile Include="Migrations\202204070522470_ReportMeta.designer.cs">
+      <DependentUpon>202204070522470_ReportMeta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204070525309_ReportReportMeta.cs" />
+    <Compile Include="Migrations\202204070525309_ReportReportMeta.designer.cs">
+      <DependentUpon>202204070525309_ReportReportMeta.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\SignIn.cs" />
     <Compile Include="Models\ReportModels.cs" />
     <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -227,11 +315,10 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\DriverAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -239,11 +326,77 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202204051838580_CreateTabls.resx">
-      <DependentUpon>202204051838580_CreateTabls.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202204070400296_User.resx">
+      <DependentUpon>202204070400296_User.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202204051943502_AddCause.resx">
-      <DependentUpon>202204051943502_AddCause.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202204070403403_Account.resx">
+      <DependentUpon>202204070403403_Account.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204070407299_UserAccount.resx">
+      <DependentUpon>202204070407299_UserAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204070409467_Image.resx">
+      <DependentUpon>202204070409467_Image.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204070410431_AccountImage.resx">
+      <DependentUpon>202204070410431_AccountImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204070413587_Driver.resx">
+      <DependentUpon>202204070413587_Driver.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204070415156_UserDriver.resx">
+      <DependentUpon>202204070415156_UserDriver.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204070417594_Vehicle.resx">
+      <DependentUpon>202204070417594_Vehicle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204070419326_VehicleDriver.resx">
+      <DependentUpon>202204070419326_VehicleDriver.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204070421209_Police.resx">
+      <DependentUpon>202204070421209_Police.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204070423573_UserPolice.resx">
+      <DependentUpon>202204070423573_UserPolice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204070425002_RDA.resx">
+      <DependentUpon>202204070425002_RDA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204070425586_UserRDA.resx">
+      <DependentUpon>202204070425586_UserRDA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204070427576_Insurance.resx">
+      <DependentUpon>202204070427576_Insurance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204070429405_UserInsurance.resx">
+      <DependentUpon>202204070429405_UserInsurance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204070434019_Report.resx">
+      <DependentUpon>202204070434019_Report.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204070435137_DriverReport.resx">
+      <DependentUpon>202204070435137_DriverReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204070436365_PoliceReport.resx">
+      <DependentUpon>202204070436365_PoliceReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204070437590_RDAReport.resx">
+      <DependentUpon>202204070437590_RDAReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204070440382_InsuranceReport.resx">
+      <DependentUpon>202204070440382_InsuranceReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204070513163_VehicleReport.resx">
+      <DependentUpon>202204070513163_VehicleReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204070519083_ReportImage.resx">
+      <DependentUpon>202204070519083_ReportImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204070522470_ReportMeta.resx">
+      <DependentUpon>202204070522470_ReportMeta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204070525309_ReportReportMeta.resx">
+      <DependentUpon>202204070525309_ReportReportMeta.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

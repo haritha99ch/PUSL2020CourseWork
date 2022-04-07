@@ -8,14 +8,17 @@ namespace AccidentsReports.Models {
         public int Id { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
+        public DateTime DatetTime { get; set; }
         public string Location { get; set; }
         public string Category { get; set; }
+        public string Cause { get; set; }
+        public List<string> VehicleClasses { get; set; }
         public string Description { get; set; }
         public float DamageScale { get; set; }
         public string ImagePath { get; set; }
+        public string Status { get; set; }
     }
     public class ReportDetail:Report {
-        public string Cause { get; set; }
         public List<Vehicle> Vehicles { get; set; }
         public string ApprovedBy { get; set; }
         public string DamageEstimatedBy { get; set; }
