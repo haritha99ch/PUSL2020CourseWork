@@ -1,0 +1,15 @@
+﻿body {
+}
+
+.form-container .row {
+}
+
+.form-group .form-control {
+    margin-bottom: 10px;
+}
+.form-group .form-label{
+    margin-bottom:0px;
+    font-weight:500
+}
+
+

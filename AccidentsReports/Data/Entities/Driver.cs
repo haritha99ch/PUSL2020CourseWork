@@ -9,8 +9,8 @@ namespace AccidentsReports.Data.Entities {
     public class Driver {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int LicenceId { get; set; }
-        public int DriverNIC { get; set; }
+        public long LicenceId { get; set; }
+        public long DriverNIC { get; set; }
 
 
         [ForeignKey("DriverNIC")]

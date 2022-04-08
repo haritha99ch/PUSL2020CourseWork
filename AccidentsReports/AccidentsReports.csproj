@@ -129,6 +129,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\SignUpController.cs" />
     <Compile Include="Data\ARDbContext.cs" />
     <Compile Include="Data\Entities\Account.cs" />
     <Compile Include="Data\Entities\Driver.cs" />
@@ -143,6 +144,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202204071442564_Mod_AccountUser.cs" />
+    <Compile Include="Migrations\202204071442564_Mod_AccountUser.designer.cs">
+      <DependentUpon>202204071442564_Mod_AccountUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204071505432_Drop_AccountImage.cs" />
+    <Compile Include="Migrations\202204071505432_Drop_AccountImage.designer.cs">
+      <DependentUpon>202204071505432_Drop_AccountImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204071640398_Int64.cs" />
+    <Compile Include="Migrations\202204071640398_Int64.designer.cs">
+      <DependentUpon>202204071640398_Int64.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\202204070400296_User.cs" />
     <Compile Include="Migrations\202204070400296_User.designer.cs">
       <DependentUpon>202204070400296_User.cs</DependentUpon>
@@ -239,8 +253,8 @@
     <Compile Include="Migrations\202204070525309_ReportReportMeta.designer.cs">
       <DependentUpon>202204070525309_ReportReportMeta.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\UserModels.cs" />
     <Compile Include="Models\SignIn.cs" />
     <Compile Include="Models\ReportModels.cs" />
     <Compile Include="Models\Vehicle.cs" />
@@ -263,6 +277,16 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\jquery-ui.structure.css" />
+    <Content Include="Content\jquery-ui.theme.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -299,6 +323,7 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -315,10 +340,10 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\SignUp\Driver.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -397,6 +422,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202204070525309_ReportReportMeta.resx">
       <DependentUpon>202204070525309_ReportReportMeta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204071442564_Mod_AccountUser.resx">
+      <DependentUpon>202204071442564_Mod_AccountUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204071505432_Drop_AccountImage.resx">
+      <DependentUpon>202204071505432_Drop_AccountImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204071640398_Int64.resx">
+      <DependentUpon>202204071640398_Int64.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

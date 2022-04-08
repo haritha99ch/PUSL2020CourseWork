@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 
 namespace AccidentsReports.Data {
-    public class ARDbContext:DbContext {
+    public class ARDbContext : DbContext {
         public ARDbContext() : base("ARDbContext") { }
 
         public DbSet<User> Users { get; set; }

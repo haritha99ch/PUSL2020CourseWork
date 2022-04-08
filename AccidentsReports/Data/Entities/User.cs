@@ -9,7 +9,7 @@ namespace AccidentsReports.Data.Entities {
     public class User {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int NIC { get; set; }
+        public long NIC { get; set; }
         [Required]
         [StringLength(50)]
         public string FirstName { get; set; }
@@ -34,5 +34,11 @@ namespace AccidentsReports.Data.Entities {
         public string Address { get; set; }
         [Required]
         public int PhoneNumber { get; set; }
+        [StringLength(100)]
+        public string AccountEmail { get; set; }
+
+
+        [ForeignKey("AccountEmail")]
+        public Account Account { get; set; }
     }
 }

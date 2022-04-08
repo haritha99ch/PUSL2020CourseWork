@@ -9,12 +9,12 @@ namespace AccidentsReports.Data.Entities {
     public class Report {
         [Key]
         public int ReportId { get; set; }
-        public int AuthorLicence { get; set; }
-        public int? ApprovedBy { get; set; }
+        public long AuthorLicence { get; set; }
+        public long? ApprovedBy { get; set; }
         public string Status { get; set; }
-        public int? DamageEstimatedBy { get; set; }
+        public long? DamageEstimatedBy { get; set; }
         public float Damage { get; set; }
-        public int? CalimedBy { get; set; }
+        public long? CalimedBy { get; set; }
 
 
 

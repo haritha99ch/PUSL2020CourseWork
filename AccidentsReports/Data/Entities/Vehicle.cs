@@ -10,7 +10,7 @@ namespace AccidentsReports.Data.Entities {
         [Key]
         [StringLength(20)]
         public string PlateNumber { get; set; }
-        public int? DriverLicence { get; set; }
+        public long? DriverLicence { get; set; }
         [StringLength(20)]
         public string ModelName { get; set; }
         [Required]

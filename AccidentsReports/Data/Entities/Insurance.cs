@@ -9,8 +9,8 @@ namespace AccidentsReports.Data.Entities {
     public class Insurance {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int EmpId { get; set; }
-        public int InsuranceNIC { get; set; }
+        public long EmpId { get; set; }
+        public long InsuranceNIC { get; set; }
         [Required]
         [StringLength(50)]
         public string Company { get; set; }

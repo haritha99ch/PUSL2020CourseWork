@@ -8,12 +8,11 @@ using System.Web;
 namespace AccidentsReports.Data.Entities {
     public class Account {
         [Key]
-        public int UserId { get; set; }
-        [Required]
         [StringLength(100)]
         public string Email { get; set; }
         [Required]
         [StringLength(20)]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
         [Required]
         public bool IsDriver { get; set; }
@@ -23,12 +22,8 @@ namespace AccidentsReports.Data.Entities {
         public bool IsInsurance { get; set; }
         [Required]
         public bool IsRDA { get; set; }
-        public int? ProfilePic { get; set; }
+        public string ProfilePic { get; set; }
 
 
-        [ForeignKey("UserId")]
-        public User User { get; set; }
-        [ForeignKey("ProfilePic")]
-        public Image Image { get; set; }
     }
 }

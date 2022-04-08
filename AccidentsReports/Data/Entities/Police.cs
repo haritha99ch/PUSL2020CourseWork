@@ -9,8 +9,8 @@ namespace AccidentsReports.Data.Entities {
     public class Police {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int PoliceId { get; set; }
-        public int PoliceNIC { get; set; }
+        public long PoliceId { get; set; }
+        public long PoliceNIC { get; set; }
         [Required]
         [StringLength(100)]
         public string PoliceDomain { get; set; }
