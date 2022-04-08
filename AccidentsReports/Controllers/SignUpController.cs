@@ -10,20 +10,19 @@ using System.Web.Mvc;
 namespace AccidentsReports.Controllers {
     public class SignUpController : Controller {
         // GET: SignUp
+
+        #region Driver
         public ActionResult Driver() {
             ViewBag.Errors = new List<string>();
             return View();
         }
-
         [HttpPost]
         public ActionResult Driver(Models.Driver request) {
             using (var db = new ARDbContext()) {
-
-                ViewBag.Errors = IsExistsUser(db, request as object);
+                ViewBag.Errors = IsUserExists(db, request as object);
                 if (ViewBag.Errors.Count > 0) {
                     return View();
                 }
-
                 db.Drivers.Add(
                     new Driver {
                         User = new User {
@@ -48,6 +47,46 @@ namespace AccidentsReports.Controllers {
             }
             return View();
         }
+        #endregion
+        #region Police
+        public ActionResult Police() {
+            ViewBag.Errors = new List<string>();
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Police(Models.Police request) {
+            using(var db = new ARDbContext()) {
+                ViewBag.Errors=IsUserExists(db, request as object);
+                if (ViewBag.Errors.Count > 0) {
+                    return View();
+                }
+                db.Polices.Add(
+                    new Police {
+                        User = new User {
+                            NIC= request.NIC,
+                            FirstName= request.FirstName,
+                            LastName= request.LastName,
+                            Gender= request.Gender.ToString(),
+                            DOB= request.DOB,
+                            Address= request.Address,
+                            PhoneNumber= request.PhoneNumber,
+                            Account= new Account {
+                                Email= request.Email,
+                                Password=request.Password,
+                                IsPolice=true,
+                                ProfilePic = string.IsNullOrEmpty(request.ImagePath) ? "Content/Images/Profiles/Defualt.png" : request.ImagePath
+                            }
+                        },
+                        PoliceId=request.PoliceId,
+                        PoliceDomain=request.Domain
+                    }
+                );
+                db.SaveChanges();
+            }
+            return View();
+        }
+        #endregion
+
 
         #region IsExistsValidation
         private bool IsNICExists(ARDbContext db, long aNIC) {
@@ -68,7 +107,7 @@ namespace AccidentsReports.Controllers {
             }
             return false;
         }
-        private List<string> IsExistsUser(ARDbContext db, object aRequest) {
+        private List<string> IsUserExists(ARDbContext db, object aRequest) {
             List<string> errors = new List<string>();
             if (aRequest is Models.Driver) {
                 var request = (Models.Driver)aRequest;
