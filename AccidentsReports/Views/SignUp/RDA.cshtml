@@ -1,11 +1,11 @@
-﻿@model AccidentsReports.Models.Police
+﻿@model AccidentsReports.Models.RDA
 
 @{
-    ViewBag.Title = "Police";
+    ViewBag.Title = "RDA";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Police</h2>
+<h2>RDA</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
@@ -82,9 +82,9 @@
             <div class="row">
                 <div class="col">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.PoliceId, new { @class = "form-label" })
-                        @Html.ValidationMessageFor(m => m.PoliceId, "", new { @class = "text-danger" })
-                        @Html.TextBoxFor(m => m.PoliceId, new { @class = "form-control" })
+                        @Html.LabelFor(m => m.EmployeeId, new { @class = "form-label" })
+                        @Html.ValidationMessageFor(m => m.EmployeeId, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(m => m.EmployeeId, new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="col">

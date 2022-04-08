@@ -1,11 +1,11 @@
-﻿@model AccidentsReports.Models.Police
+﻿@model AccidentsReports.Models.Insurance
 
 @{
-    ViewBag.Title = "Police";
+    ViewBag.Title = "Insurance";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Police</h2>
+<h2>Insurance</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
@@ -82,16 +82,16 @@
             <div class="row">
                 <div class="col">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.PoliceId, new { @class = "form-label" })
-                        @Html.ValidationMessageFor(m => m.PoliceId, "", new { @class = "text-danger" })
-                        @Html.TextBoxFor(m => m.PoliceId, new { @class = "form-control" })
+                        @Html.LabelFor(m => m.EmployeeId, new { @class = "form-label" })
+                        @Html.ValidationMessageFor(m => m.EmployeeId, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(m => m.EmployeeId, new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Domain, new { @class = "form-label" })
-                        @Html.ValidationMessageFor(m => m.Domain, "", new { @class = "text-danger" })
-                        @Html.TextBoxFor(m => m.Domain, new { @class = "form-control" })
+                        @Html.LabelFor(m => m.Company, new { @class = "form-label" })
+                        @Html.ValidationMessageFor(m => m.Company, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(m => m.Company, new { @class = "form-control" })
                     </div>
                 </div>
             </div>
@@ -123,4 +123,3 @@
     </div>
 
 }
-

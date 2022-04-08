@@ -342,6 +342,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\SignUp\Driver.cshtml" />
     <Content Include="Views\SignUp\Police.cshtml" />
+    <Content Include="Views\SignUp\RDA.cshtml" />
+    <Content Include="Views\SignUp\Insurance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

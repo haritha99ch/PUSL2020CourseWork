@@ -86,6 +86,82 @@ namespace AccidentsReports.Controllers {
             return View();
         }
         #endregion
+        #region RDA
+        public ActionResult RDA() {
+            ViewBag.Errors = new List<string>();
+            return View();
+        }
+        [HttpPost]
+        public ActionResult RDA(Models.RDA request) {
+            using (var db = new ARDbContext()) {
+                ViewBag.Errors = IsUserExists(db, request as object);
+                if (ViewBag.Errors.Count > 0) {
+                    return View();
+                }
+                db.RDAs.Add(
+                    new RDA {
+                        User = new User {
+                            NIC = request.NIC,
+                            FirstName = request.FirstName,
+                            LastName = request.LastName,
+                            Gender = request.Gender.ToString(),
+                            DOB = request.DOB,
+                            Address = request.Address,
+                            PhoneNumber = request.PhoneNumber,
+                            Account = new Account {
+                                Email = request.Email,
+                                Password = request.Password,
+                                IsRDA = true,
+                                ProfilePic = string.IsNullOrEmpty(request.ImagePath) ? "Content/Images/Profiles/Defualt.png" : request.ImagePath
+                            }
+                        },
+                        EmpId = request.EmployeeId,
+                        RDADomain = request.Domain
+                    }
+                );
+                db.SaveChanges();
+            }
+            return View();
+        }
+        #endregion
+        #region Insurance
+        public ActionResult Insurance() {
+            ViewBag.Errors = new List<string>();
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Insurance(Models.Insurance request) {
+            using (var db = new ARDbContext()) {
+                ViewBag.Errors = IsUserExists(db, request as object);
+                if (ViewBag.Errors.Count > 0) {
+                    return View();
+                }
+                db.Insurances.Add(
+                    new Insurance {
+                        User = new User {
+                            NIC = request.NIC,
+                            FirstName = request.FirstName,
+                            LastName = request.LastName,
+                            Gender = request.Gender.ToString(),
+                            DOB = request.DOB,
+                            Address = request.Address,
+                            PhoneNumber = request.PhoneNumber,
+                            Account = new Account {
+                                Email = request.Email,
+                                Password = request.Password,
+                                IsInsurance = true,
+                                ProfilePic = string.IsNullOrEmpty(request.ImagePath) ? "Content/Images/Profiles/Defualt.png" : request.ImagePath
+                            }
+                        },
+                        EmpId = request.EmployeeId,
+                        Company = request.Company
+                    }
+                );
+                db.SaveChanges();
+            }
+            return View();
+        }
+        #endregion
 
 
         #region IsExistsValidation
