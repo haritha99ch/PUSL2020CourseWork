@@ -1,0 +1,38 @@
+﻿@model AccidentsReports.Models.SignIn
+@{
+    ViewBag.Title = "SignIn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container form-sign-in">
+    <h2 class="sign-in-center">SignIn</h2>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        if (IsPost) {
+            <div class="alert alert-danger">
+                @ViewBag.Error
+            </div>
+        }
+        @Session["CurrentUserID"]
+        <div class="form-container ">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email Address" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+            </div>
+        </div>
+        <div class="sign-in-center">
+            <input type="submit" value="Sign In" class="btn-primary btn-signin btn-lg" />
+        </div>
+
+
+    }
+</div>
+
+

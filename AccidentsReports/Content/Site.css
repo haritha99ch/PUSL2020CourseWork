@@ -1,15 +1,30 @@
-﻿body {
-}
-
-.form-container .row {
+﻿
+.btn-signin {
+    width: 300px;
 }
 
 .form-group .form-control {
     margin-bottom: 10px;
 }
-.form-group .form-label{
-    margin-bottom:0px;
-    font-weight:500
+
+.form-label {
+    margin-bottom: 0;
+    font-weight: 500;
+}
+
+.form-container {
+    align-content: center;
+}
+
+.form-sign-up {
+    width: 600px;
+}
+
+.form-sign-in {
+    width: 400px;
 }
 
 
+.sign-in-center {
+    text-align: center;
+}

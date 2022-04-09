@@ -10,7 +10,7 @@ namespace AccidentsReports.Models {
         Female,
     }
 
-    public abstract class User : Account {
+    public class User : Account {
         [Required]
         [Display(Name = "NIC Number")]
         [Range(0, 999999999999, ErrorMessage = "Please Enter a Valid NIC Number")]

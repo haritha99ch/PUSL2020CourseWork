@@ -11,7 +11,7 @@
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
 
-    <div class="container ">
+    <div class="container form-sign-up">
         @if (ViewBag.Errors.Count > 0) {
             <div class="alert alert-danger">
                 <ul>

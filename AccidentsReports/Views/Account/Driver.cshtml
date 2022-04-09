@@ -1,0 +1,32 @@
+﻿@model AccidentsReports.Models.Driver
+
+@{
+    ViewBag.Title = "Driver";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-4 position-fixed bg-light h-100">
+        <h2>Account</h2>
+        @{
+            Html.RenderPartial("User");
+        }
+        <h4>Driver</h4>
+        <div class="row">
+            <div class="col-auto">
+                    @Html.LabelFor(model => model.LicenceNumber, new { @class = "form-label" })
+            </div>
+            <div class="col-auto">
+                @Html.DisplayFor(model => model.LicenceNumber)
+            </div>
+        </div>
+        </div>
+    <div class="col-4"></div>
+    <div class="col">
+       @{ 
+//Html.RenderPartial("Reports", new { Model.NIC });
+       }
+    </div>
+</div>
+

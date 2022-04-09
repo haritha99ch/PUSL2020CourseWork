@@ -37,7 +37,7 @@ namespace AccidentsReports.Controllers {
                                 Email = request.Email,
                                 Password = request.Password,
                                 IsDriver = true,
-                                ProfilePic = string.IsNullOrEmpty(request.ImagePath) ? "Content/Images/Profiles/Defualt.png" : request.ImagePath
+                                ProfilePic = string.IsNullOrEmpty(request.ImagePath) ? "~/Content/images/Defualt.png" : $"~/Content/images/{request.NIC}"
                             },
                         },
                         LicenceId = request.LicenceNumber
@@ -162,7 +162,6 @@ namespace AccidentsReports.Controllers {
             return View();
         }
         #endregion
-
 
         #region IsExistsValidation
         private bool IsNICExists(ARDbContext db, long aNIC) {
