@@ -1,0 +1,70 @@
+﻿@model AccidentsReports.Models.ReportDetail
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Msg</h2>
+
+@using (Html.BeginForm("Create", "Report", new { enctype = "multipart/form-data" })) {
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, new { @class = "form-label" })
+            @Html.EditorFor(model => model.Title, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cause, new { @class = "form-label" })
+            @Html.EnumDropDownListFor(model => model.Cause)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Latitude, new { @class = "form-label" })
+            @Html.EditorFor(model => model.Latitude, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Longitude, new { @class = "form-label" })
+            @Html.EditorFor(model => model.Longitude, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Scale, new { @class = "form-label" })
+            @Html.EditorFor(model => model.Scale, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, new { @class = "form-label" })
+            @Html.EditorFor(model => model.Description, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsVehicleVehicle, new { @class = "form-label" })
+            @Html.EditorFor(model => model.IsVehicleVehicle, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsVehiclePedestrian, new { @class = "form-label" })
+            @Html.EditorFor(model => model.IsVehiclePedestrian, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsVehicleProperty, new { @class = "form-label" })
+            @Html.EditorFor(model => model.IsVehicleProperty, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Vehicles, new { @class = "form-label" })
+            @{
+                Html.RenderPartial("NewVehicle");
+            }
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImagePath, new { @class = "form-label" })
+            @{
+//Html.RenderAction("NewImage");
+            }
+        </div>
+        <div class="sign-in-center">
+            <input type="submit" value="Post" class="btn-primary btn-signin btn-lg" />
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

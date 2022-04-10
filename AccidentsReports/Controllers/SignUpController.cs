@@ -37,7 +37,6 @@ namespace AccidentsReports.Controllers {
                                 Email = request.Email,
                                 Password = request.Password,
                                 IsDriver = true,
-                                ProfilePic = string.IsNullOrEmpty(request.ImagePath) ? "~/Content/images/Defualt.png" : $"~/Content/images/{request.NIC}"
                             },
                         },
                         LicenceId = request.LicenceNumber
@@ -74,7 +73,6 @@ namespace AccidentsReports.Controllers {
                                 Email= request.Email,
                                 Password=request.Password,
                                 IsPolice=true,
-                                ProfilePic = string.IsNullOrEmpty(request.ImagePath) ? "Content/Images/Profiles/Defualt.png" : request.ImagePath
                             }
                         },
                         PoliceId=request.PoliceId,
@@ -112,7 +110,6 @@ namespace AccidentsReports.Controllers {
                                 Email = request.Email,
                                 Password = request.Password,
                                 IsRDA = true,
-                                ProfilePic = string.IsNullOrEmpty(request.ImagePath) ? "Content/Images/Profiles/Defualt.png" : request.ImagePath
                             }
                         },
                         EmpId = request.EmployeeId,
@@ -150,7 +147,6 @@ namespace AccidentsReports.Controllers {
                                 Email = request.Email,
                                 Password = request.Password,
                                 IsInsurance = true,
-                                ProfilePic = string.IsNullOrEmpty(request.ImagePath) ? "Content/Images/Profiles/Defualt.png" : request.ImagePath
                             }
                         },
                         EmpId = request.EmployeeId,

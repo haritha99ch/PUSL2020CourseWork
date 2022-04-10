@@ -257,6 +257,7 @@
       <DependentUpon>202204070525309_ReportReportMeta.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Image.cs" />
     <Compile Include="Models\UserModels.cs" />
     <Compile Include="Models\SignIn.cs" />
     <Compile Include="Models\ReportModels.cs" />
@@ -352,10 +353,12 @@
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Driver.cshtml" />
     <Content Include="Views\Account\User.cshtml" />
+    <Content Include="Views\Report\Create.cshtml" />
+    <Content Include="Views\Report\NewVehicle.cshtml" />
+    <Content Include="Views\Report\NewImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Report\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

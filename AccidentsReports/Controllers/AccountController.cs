@@ -65,7 +65,6 @@ namespace AccidentsReports.Controllers {
                         PhoneNumber = getUser.user.PhoneNumber,
                         LicenceNumber = getUser.driver.LicenceId,
                         Email = getUser.account.Email,
-                        ImagePath = "~/Content/images/Defualt.png"
                     };
                 }
             }
