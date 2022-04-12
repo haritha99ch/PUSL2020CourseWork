@@ -28,6 +28,7 @@ namespace AccidentsReports.Controllers {
                     ViewBag.Error = "Invalid Login";
                     return View();
                 }
+                Session["CurrentUserEmail"] = request.Email;
                 Session["CurrentUserID"] = db.Users
                     .FirstOrDefault(
                         u =>

@@ -8,26 +8,25 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace AccidentsReports.Controllers {
+    [Authorize]
     public class AccountController : Controller {
         // GET: Account
-
+        long CurrentUserId;
+        string CurrentUserEmail;
         public ActionResult Index() {
-            long Id = 1234567890;
-            Session["IsDriver"] = true;
+            CurrentUserId = 1234567890;
+            CurrentUserEmail = Session["CurrentUserEmail"].ToString();
             bool isDriver = (bool)Session["IsDriver"];
-            //bool isPolice = (bool)Session["IsPolice"];
-            //bool isRDA = (bool)Session["IsRDA"];
-            //bool isInsurance = (bool)Session["IsInsurance"];
-            //if (true) {
-            if (isDriver) return RedirectToAction("Driver");
-            //}
-            //else if (isPolice) {
-            //    Police loggedUser = null;
-            //}
-
+            bool isPolice = (bool)Session["IsPolice"];
+            bool isRDA = (bool)Session["IsRDA"];
+            bool isInsurance = (bool)Session["IsInsurance"];
+            if (isDriver) return RedirectToActionPermanent("Driver");
+            if (isPolice) return RedirectToAction("Police");
+            if (isRDA) return RedirectToAction("RDA");
+            if (isInsurance) return RedirectToAction("Insurance");
             return View();
         }
-        public PartialViewResult User() {
+        public new PartialViewResult User() {
             return PartialView();
         }
 
@@ -53,7 +52,7 @@ namespace AccidentsReports.Controllers {
                             user = ud.u,
                             driver = ud.d,
                         }
-                    ).FirstOrDefault(u => u.user.NIC.Equals(1234567890));
+                    ).FirstOrDefault(u => u.user.NIC.Equals(CurrentUserId));
                 if (getUser != null) {
                     User = new Driver() {
                         NIC = getUser.user.NIC,
@@ -64,7 +63,7 @@ namespace AccidentsReports.Controllers {
                         DOB = getUser.user.DOB,
                         PhoneNumber = getUser.user.PhoneNumber,
                         LicenceNumber = getUser.driver.LicenceId,
-                        Email = getUser.account.Email,
+                        Email = getUser.account.Email
                     };
                 }
             }

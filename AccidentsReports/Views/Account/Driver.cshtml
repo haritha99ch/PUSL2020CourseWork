@@ -9,19 +9,86 @@
 <div class="row">
     <div class="col-4 position-fixed bg-light h-100">
         <h2>Account</h2>
-        @{
+        @*@{
             Html.RenderPartial("User");
-        }
+        }*@
+        <div class="row">
+            <div class="col-5">
+                <img src="~/Content/images/Defualt.png" class="rounded-3 img-thumbnail">
+            </div>
+            <div class="col ">
+                <div class="row">
+                    <table>
+                        <tr>
+                            <td>
+                                @Html.Label("Name: ", new { @class = "form-label" })
+                            </td>
+                            <td>
+                                @Html.Label($"{Model.FirstName} {Model.LastName}")
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.Gender, new { @class = "form-label" })
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Gender)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.DOB, new { @class = "form-label" })
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.DOB)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.Age, new { @class = "form-label" })
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Age)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.Email, new { @class = "form-label" })
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Email)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.Address, new { @class = "form-label" })
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Address)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.PhoneNumber, new { @class = "form-label" })
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.PhoneNumber)
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
         <h4>Driver</h4>
         <div class="row">
             <div class="col-auto">
-                    @Html.LabelFor(model => model.LicenceNumber, new { @class = "form-label" })
+                @Html.LabelFor(model => model.LicenceNumber, new { @class = "form-label" })
             </div>
             <div class="col-auto">
                 @Html.DisplayFor(model => model.LicenceNumber)
             </div>
         </div>
-        </div>
+    </div>
     <div class="col-4"></div>
     <div class="col">
        @{ 
