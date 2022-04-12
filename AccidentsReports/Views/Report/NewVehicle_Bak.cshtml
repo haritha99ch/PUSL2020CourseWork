@@ -1,0 +1,192 @@
+﻿@       dynamic __inheritsHelper = null;
+@model List<Vehicle>
+
+
+@*@helper NewVeuhicle(int i) {
+    <div class="form-group">
+        @Html.LabelFor(model => model[i].PlateNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model[i].PlateNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model[i].PlateNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model[i].ModelName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model[i].ModelName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model[i].ModelName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model[i].Class, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(model => model[i].Class, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model[i].Class, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+ }*@ 
+
+<h2>Hello there</h2>
+
+
+<!--@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" id="form-container">
+        
+        
+        <button type="button" id="newVehicle" name="newVehicle" onClick="NewVehicle()" class="btn-success">Add Vehicle</button>
+    </div>
+
+
+}
+
+
+<script>
+    var i = 0;
+    const divClass = "form-group";
+    const lblClass = "control-label col-1";
+    const txtClass = "form-control text-box single-line";
+    const spnClass = "field-validation-valid text-danger";
+    const colClass = "col-md-10";
+
+    function NewVehicle() {
+        const parent = document.getElementById("form-container");
+        const parentNode = document.createElement("div");
+        const heading = document.createElement("h3");
+        heading.innerHTML = "New Vehicle";
+        parentNode.append(heading);
+        const hr = document.createElement("hr");
+
+
+        var formGroup = CreateFormGroup();
+        var label = CreateLabel("Plate Number");
+        var col = CreateCol();
+        var text = CreateText(i, "Plate Number", "PlateNumber", "text");
+        var span = CreateSpan(i, "PlateNumber");
+
+        formGroup.appendChild(label);
+        formGroup.appendChild(span);
+        col.appendChild(text);
+        formGroup.appendChild(col);
+        parentNode.appendChild(formGroup);
+
+
+        formGroup = CreateFormGroup();
+        label = CreateLabel("Model Name");
+        col = CreateCol();
+        text = CreateText(i, "Model Name", "ModelName", "text");
+        span = CreateSpan(i, "ModelName");
+
+        formGroup.appendChild(label);
+        formGroup.appendChild(span);
+        col.appendChild(text);
+        formGroup.appendChild(col);
+        parentNode.appendChild(formGroup);
+
+
+        formGroup = CreateFormGroup();
+        label = CreateLabel("Vehicle Class");
+        col = CreateCol();
+        var drpdwn = document.createElement("select");
+        drpdwn.className = "form-control";
+        drpdwn.name = "[" + i + "].Class";
+        drpdwn.setAttribute("data-val", "true");
+        drpdwn.setAttribute("data-val-required", "The Vehicle Class field is required.");
+        drpdwn.name = "[" + i + "].Class";
+
+        var optn = document.createElement("option");
+        optn.selected = "selected";
+        optn.value = "0";
+        optn.innerHTML = "Car";
+        drpdwn.appendChild(optn);
+
+        optn = document.createElement("option");
+        optn.value = "1";
+        optn.innerHTML = "Van";
+        drpdwn.appendChild(optn);
+
+        optn = document.createElement("option");
+        optn.value = "2";
+        optn.innerHTML = "Bus";
+        drpdwn.appendChild(optn);
+
+        optn = document.createElement("option");
+        optn.value = "3";
+        optn.innerHTML = "Truck";
+        drpdwn.appendChild(optn);
+
+        optn = document.createElement("option");
+        optn.value = "4";
+        optn.innerHTML = "SUV";
+        drpdwn.appendChild(optn);
+
+        optn = document.createElement("option");
+        optn.value = "5";
+        optn.innerHTML = "Heavy Vehicle";
+        drpdwn.appendChild(optn);
+
+        span = CreateSpan(i, "Class");
+
+        formGroup.appendChild(label);
+        formGroup.appendChild(span);
+        col.appendChild(drpdwn);
+        formGroup.appendChild(col);
+        parentNode.appendChild(formGroup);
+
+        parentNode.appendChild(hr);
+        parent.appendChild(parentNode);
+        i++;
+    }
+
+    function CreateFormGroup() {
+        const formGroup = document.createElement("div");
+        formGroup.className = divClass;
+        return formGroup;
+    }
+    function CreateLabel(name) {
+        const label = document.createElement("label");
+        label.className = lblClass;
+        label.innerHTML = name;
+        return label;
+    }
+    function CreateCol() {
+        const col = document.createElement("div");
+        col.className = colClass;
+        col.name="control-container"
+        return col;
+    }
+    function CreateText(i, name, prop, type) {
+        const text = document.createElement("input");
+        text.className = txtClass;
+        text.setAttribute("data-val", "true");
+        text.required = true;
+        if (type == "number") {
+            text.setAttribute("data-val-number", "The field " + name + " must be a number.");
+        }
+        text.setAttribute("data-val-required", "The " + name+" field is required.");
+        text.name = "[" + i + "]." + prop+"";
+        text.type = type;
+        return text;
+    }
+
+    function CreateSpan(i, prop) {
+        const span = document.createElement("span");
+        span.className = spnClass;
+        span.setAttribute("data-valmsg-for", "[" + i + "]." + prop+"");
+        span.setAttribute("data-valmsg-replace", "true");
+        return span;
+    }
+
+    
+
+    
+    
+</script>-->
+
+
+
+

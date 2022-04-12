@@ -9,6 +9,8 @@ namespace AccidentsReports.Models {
         public int Id { get; set; }
         [Display(Name ="Add an Image")]
         public string ImagePath { get; set; }
-        public HttpPostedFile ImageFile { get; set; }
+        [Required]
+        [Display(Name ="Upload Photo")]
+        public HttpPostedFileBase ImageFile { get; set; }
     }
 }

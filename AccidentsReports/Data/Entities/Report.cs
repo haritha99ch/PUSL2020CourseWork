@@ -9,6 +9,7 @@ namespace AccidentsReports.Data.Entities {
     public class Report {
         [Key]
         public int ReportId { get; set; }
+        public int ReporMetatId { get; set; }
         public long AuthorLicence { get; set; }
         public long? ApprovedBy { get; set; }
         public string Status { get; set; }
@@ -28,5 +29,7 @@ namespace AccidentsReports.Data.Entities {
         public Insurance Insurance { get; set; }
         public ICollection<Vehicle> Vehicles { get; set; }
         public ICollection<Image> Images { get; set; }
+        [ForeignKey("ReporMetatId")]
+        public ReportMeta ReportMeta { get; set; }
     }
 }

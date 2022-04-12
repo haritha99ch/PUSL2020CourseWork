@@ -15,11 +15,19 @@ namespace AccidentsReports.Data.Entities {
         [Required]
         public DateTime DateTime { get; set; }
         [Required]
-        public float Latitude { get; set; }
+        [StringLength(20)]
+        public string City { get; set; }
         [Required]
-        public float Longitude { get; set; }
+        public int No { get; set; }
         [Required]
-        [StringLength(10)]
+        [StringLength(20)]
+        public string Street1 { get; set; }
+        [StringLength(20)]
+        public string Street2 { get; set; }
+        [StringLength(20)]
+        public string Street3 { get; set; }
+        [Required]
+        [StringLength(20)]
         public string Cause { get; set; }
         [Required]
         public bool IsVehicleVehicle { get; set; }
@@ -34,7 +42,6 @@ namespace AccidentsReports.Data.Entities {
         public string Description { get; set; }
 
 
-        [ForeignKey("ReportId")]
-        public Report Report { get; set; }
+
     }
 }

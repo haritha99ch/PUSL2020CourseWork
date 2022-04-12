@@ -1,56 +1,33 @@
-﻿@using AccidentsReports.Models;
-@model List<Vehicle>
- 
-@{ 
-    int i = 0;
+﻿@model AccidentsReports.Models.ReportDetail
+@{
+    int i = (int)Session["VehicleCount"];
 }
 
 
-@helper NewVehicle(int i) {
-    <div class="form-group">
-        @Html.LabelFor(model => model[i].PlateNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model[i].PlateNumber, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model[i].PlateNumber, "", new { @class = "text-danger" })
+<div class="col-4">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <hr />
+    <h6>New Vehicle</h6>
+    <div class="row">
+        <div class="col">
+            @Html.LabelFor(model => model.Vehicles[i].PlateNumber, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(model => model.Vehicles[i].PlateNumber, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.Vehicles[i].PlateNumber, new { htmlAttributes = new { @class = "form-control", @required = "true" } })
+        </div>
+        <div class="col">
+            <div class="row">
+                @Html.LabelFor(model => model.Vehicles[i].Class, htmlAttributes: new { @class = "control-label" })
+            </div>
+            @Html.ValidationMessageFor(model => model.Vehicles[i].Class, "", new { @class = "text-danger" })
+            @Html.EnumDropDownListFor(model => model.Vehicles[i].Class, new { @class = "btn btn-outline-secondary dropdown-toggle", @required = "true" })
         </div>
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model[i].ModelName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model[i].ModelName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model[i].ModelName, "", new { @class = "text-danger" })
+    <div class="row">
+        <div class="col">
+            @Html.LabelFor(model => model.Vehicles[i].ModelName, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(model => model.Vehicles[i].ModelName, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.Vehicles[i].ModelName, new { htmlAttributes = new { @class = "form-control", @required = "true" } })
         </div>
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model[i].Class, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EnumDropDownListFor(model => model[i].Class, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model[i].Class, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model[i].LicenceNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model[i].LicenceNumber, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model[i].LicenceNumber, "", new { @class = "text-danger" })
-        </div>
-    </div>
-}
-
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Vehicle</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <button type="button" @onClick class="btn-success">Add Vehicle</button>
-    </div>
-
-}
-
-
+</div>
 

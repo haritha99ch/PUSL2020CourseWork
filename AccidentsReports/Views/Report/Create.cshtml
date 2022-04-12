@@ -1,70 +1,198 @@
 ﻿@model AccidentsReports.Models.ReportDetail
 
 @{
+    Session["VehicleCount"] = -1;
+    Session["PhotoCount"] = -1;
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@ViewBag.Msg
 
-<h2>@ViewBag.Msg</h2>
-
-@using (Html.BeginForm("Create", "Report", new { enctype = "multipart/form-data" })) {
+@using (Html.BeginForm("Create", "Report", FormMethod.Post, new { enctype = "multipart/form-data" })) {
     @Html.AntiForgeryToken()
-    <div class="container">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Title, new { @class = "form-label" })
-            @Html.EditorFor(model => model.Title, new { @class = "form-control" })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Cause, new { @class = "form-label" })
-            @Html.EnumDropDownListFor(model => model.Cause)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Latitude, new { @class = "form-label" })
-            @Html.EditorFor(model => model.Latitude, new { @class = "form-control" })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Longitude, new { @class = "form-label" })
-            @Html.EditorFor(model => model.Longitude, new { @class = "form-control" })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Scale, new { @class = "form-label" })
-            @Html.EditorFor(model => model.Scale, new { @class = "form-control" })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, new { @class = "form-label" })
-            @Html.EditorFor(model => model.Description, new { @class = "form-control" })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsVehicleVehicle, new { @class = "form-label" })
-            @Html.EditorFor(model => model.IsVehicleVehicle, new { @class = "form-control" })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsVehiclePedestrian, new { @class = "form-label" })
-            @Html.EditorFor(model => model.IsVehiclePedestrian, new { @class = "form-control" })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsVehicleProperty, new { @class = "form-label" })
-            @Html.EditorFor(model => model.IsVehicleProperty, new { @class = "form-control" })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Vehicles, new { @class = "form-label" })
-            @{
-                Html.RenderPartial("NewVehicle");
+    <div class="new-report container">
+        <div class="container">
+            <ul>
+                @foreach (var item in @ViewBag.list) {
+                    <li>@item</li>
+                }
+            </ul>
+
+            @if (@ViewBag.Errors != null) {
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach (var item in @ViewBag.Errors) {
+                            <li>@item</li>
+                        }
+                    </ul>
+                </div>
             }
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.ImagePath, new { @class = "form-label" })
-            @{
-//Html.RenderAction("NewImage");
-            }
-        </div>
-        <div class="sign-in-center">
-            <input type="submit" value="Post" class="btn-primary btn-signin btn-lg" />
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group  ">
+                <div class="row">
+                    <div class="col">
+                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", @placeholder = "Title" } })
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        @Html.ValidationMessageFor(model => model.Cause, "", new { @class = "text-danger" })
+                        <div class="col">
+                            @Html.LabelFor(model => model.Cause, htmlAttributes: new { @class = "form-label" })
+                            @Html.EnumDropDownListFor(model => model.Cause, new { @class = "btn btn-outline-primary dropdown-toggle" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "form-label" })
+                        <div class="row">
+                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col d-flex align-items-end ">
+                        <div class="row">
+                            <div class="col-3">
+                                @Html.LabelFor(model => model.Scale, new { @class = "form-label col-md-2  align-items-start" })
+                            </div>
+                            <div class="col">
+                                @Html.EditorFor(model => model.Scale, new { htmlAttributes = new { @class = "form-control", @placeholder = "0-10" } })
+                                @Html.ValidationMessageFor(model => model.Scale, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col ">
+                        <div class="row">
+                            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "form-label" })
+                            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="row">
+                            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", @placeholder = "City" } })
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="row">
+                            @Html.LabelFor(model => model.No, htmlAttributes: new { @class = "form-label" })
+                            @Html.ValidationMessageFor(model => model.No, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                @Html.EditorFor(model => model.No, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col">
+                        <div class="row">
+                            @Html.LabelFor(model => model.Streat1, htmlAttributes: new { @class = "form-label col-md-2" })
+                            @Html.ValidationMessageFor(model => model.Streat1, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="row">
+                            @Html.EditorFor(model => model.Streat1, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col">
+                        <div class="row">
+                            @Html.LabelFor(model => model.Streat2, htmlAttributes: new { @class = "form-label col-md-2" })
+                            @Html.ValidationMessageFor(model => model.Streat2, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="row">
+                            @Html.EditorFor(model => model.Streat2, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col">
+                        <div class="row">
+                            @Html.LabelFor(model => model.Streat3, htmlAttributes: new { @class = "form-label col-md-2" })
+                            @Html.ValidationMessageFor(model => model.Streat3, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="row">
+                            @Html.EditorFor(model => model.Streat3, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label"> Accident Type</label>
+                <div class="row">
+                    <div class=" col-2">
+                        @Html.LabelFor(model => model.IsVehicleVehicle, new { @class = "form-label" })
+                        @Html.EditorFor(model => model.IsVehicleVehicle)
+                    </div>
+                    <div class=" col-2">
+                        @Html.LabelFor(model => model.IsVehicleProperty, htmlAttributes: new { @class = "form-label" })
+                        @Html.EditorFor(model => model.IsVehicleProperty)
+                    </div>
+                    <div class=" col-2">
+                        @Html.LabelFor(model => model.IsVehiclePedestrian, htmlAttributes: new { @class = "form-label" })
+                        @Html.EditorFor(model => model.IsVehiclePedestrian)
+                    </div>
+                </div>
+            </div>
+            <div class="m-3"></div>
+            <div class="form-group">
+                <div id="newVehicle" class="row">
+                </div>
+                @*
+                    Rendering partial views for vehicle and images models
+                *@
+                <div class="col-4">
+                    @Ajax.ActionLink(
+                        "Add Vehicle",
+                        "NewVehicle",
+                        "Report",
+                        new AjaxOptions {
+                            UpdateTargetId = "newVehicle",
+                            InsertionMode = InsertionMode.InsertAfter,
+                            HttpMethod = "GET"
+                        },
+                        new {
+                            @class = "btn btn-success"
+                        })
+                </div>
+
+
+            </div>
+            <div class="m-3"></div>
+            <div class="form-group">
+                <div id="newImage" class="row">
+                </div>
+                @Ajax.ActionLink(
+                "Add Photos",
+                "NewImage",
+                "Report",
+                new AjaxOptions {
+                    UpdateTargetId = "newImage",
+                    InsertionMode = InsertionMode.InsertAfter,
+                    HttpMethod = "GET"
+                },
+                new {
+                    @class = "btn btn-success"
+                }
+            )
+            </div>
+            <div class="sign-in-center">
+                <input type="submit" value="Post" class="btn-primary btn-signin btn-lg" />
+            </div>
         </div>
     </div>
 
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>

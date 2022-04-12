@@ -6,13 +6,15 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace AccidentsReports.Controllers {
+    [Authorize]
     public class ReportController : Controller {
-        long currentUser;
+        long currentUser = 1234567890;
         // GET: Report
         public ActionResult Index() {
-            currentUser = (long)Session["CurrentUserID"];
+            currentUser = 1234567890;
             return View();
         }
         public ActionResult Create() {
@@ -20,85 +22,89 @@ namespace AccidentsReports.Controllers {
         }
 
         [HttpPost]
-        public ActionResult Create(ReportDetail request, List<Vehicle> rVehicles) {
-            if(rVehicles != null) {
-                @ViewBag.Msg = rVehicles[2].PlateNumber;
+        public ActionResult Create(ReportDetail request) {
+            var errors = new List<string>();
+            //Partial view model validation
+            if (request.Vehicles == null) {
+                errors.Add("There has to be atlest one Vehicle");
             }
-            #region ToDo
+            if (request.Images == null) {
+                errors.Add("There has to be atlest one Photo");
+            }
+            if (errors.Count() > 0) {
+                ViewBag.Errors = errors;
+                return View();
+            }
 
-            //using (var db = new ARDbContext()) {    //By Using Database
-
-            //    //Adding New Vehicle to to Vehicle model
-            //    var vehicles = new List<Data.Entities.Vehicle>();
-            //    foreach (var vehicle in rVehicles) {
-            //        vehicles.Add(new Data.Entities.Vehicle() {
-            //            DriverLicence = vehicle.LicenceNumber,
-            //            Class = vehicle.Class.ToString(),
-            //            ModelName = vehicle.ModelName
-            //        });
-            //    }
-
-            //    //Adding New Images to to Images model
-            //    var images = new List<Data.Entities.Image>();
-            //    int count=0;
-            //    foreach (var Item in request.Images) {
-            //        string fileName=Path.GetFileNameWithoutExtension(Item.ImageFile.ToString());
-            //        string fileExtention = Path.GetExtension(Item.ImageFile.ToString());
-            //        fileName = $"{currentUser}-{DateTime.Now:O}-{count}.{fileExtention}";
-            //        Item.ImagePath = $"~/Content/images/{fileName}";
-            //        fileName = Path.Combine(Server.MapPath("~/Content/images/"), fileName);
-            //        fileName = Path.Combine(Server.MapPath("~/Content/images/"), fileName);
-            //        Item.ImageFile.SaveAs(fileName);
-            //        images.Add(new Data.Entities.Image() {
-            //            ImagePath = Item.ImagePath
-            //        });
-
-            //        count++;
-            //    }
-
-            //    //Add the new Report to the Report model
-            //    var newReport = new Data.Entities.Report() {
-            //        AuthorLicence = db.Drivers.FirstOrDefault(d => d.DriverNIC.Equals(currentUser)).LicenceId,
-            //        Vehicles = vehicles,    //Foreign Reference
-            //        Images = images  //Foreign Reference
-            //    };
-
-            //    //Add the ReportMeta to the ReportMeta model
-            //    var reportMeta = new Data.Entities.ReportMeta() {
-            //        Title = request.Title,
-            //        Cause = request.Cause.ToString(),
-            //        DateTime = DateTime.Now,
-            //        Description = request.Description,
-            //        IsVehicleVehicle = request.IsVehicleVehicle,
-            //        IsVehicleProperty = request.IsVehicleProperty,
-            //        IsVehiclePedestrian = request.IsVehiclePedestrian,
-            //        Latitude = request.Latitude,
-            //        Longitude = request.Longitude,
-            //        Scale = request.Scale,
-            //        Report = newReport  //Foreign Reference
-            //    };
-            //    db.ReportMetas.Add(reportMeta); //Adding just reportMeta will automatically add all other entities by using reverse references
-            //    db.SaveChanges();
-
-            //}
-
-            #endregion
+            using (var db = new ARDbContext()) {    //Accesseing the database using Entity Framework
+                //Table: Vehicles
+                var Vehicles = new List<Data.Entities.Vehicle>();
+                var exisitingVehicles = new List<Vehicle>();
+                foreach (var vehicle in request.Vehicles) {
+                    bool exisits = db.Vehicles.Any(v => v.PlateNumber.Equals(vehicle.PlateNumber));
+                    if (!exisits) {
+                        var Vehicle = new Data.Entities.Vehicle() {
+                            PlateNumber = vehicle.PlateNumber,
+                            Class = vehicle.Class.ToString(),
+                            ModelName = vehicle.ModelName,
+                        };
+                        Vehicles.Add(Vehicle);
+                    }
+                    else {
+                        exisitingVehicles.Add(vehicle);
+                    }
+                }
+                //Table: Images
+                var Images = new List<Data.Entities.Image>();
+                foreach (var image in request.Images.Select((value, index) => new {value, index})) {    //Projection: Accessing the index value of selected item in the list
+                    string fileExt = Path.GetExtension(image.value.ImageFile.FileName);
+                    string fileName = $"{currentUser}-{image.index}{DateTime.Now:yyyy-dd-M--HH-mm-ss}.{fileExt}";   //Giving a new file name and using Date time and a counter to-
+                    string serverLocation = Server.MapPath("~/Content/images/");    //Assigning server location.    //-avoid duplications
+                    string path = Path.Combine(serverLocation, fileName);
+                    image.value.ImageFile.SaveAs(path);     //Saving the file in the server
+                    var Image = new Data.Entities.Image() {
+                        ImagePath = fileName    //Adding the image server location in the database.
+                    };
+                    Images.Add(Image);
+                }
+                //Table: ReportMetas
+                var ReportDetails = new Data.Entities.ReportMeta() {
+                    DateTime = DateTime.Now,
+                    Title = request.Title,
+                    Cause = request.Cause.ToString(),
+                    Description = request.Description,
+                    City = request.City,
+                    No = request.No,
+                    Street1 = request.Streat1,
+                    Street2 = request.Streat2,
+                    Street3 = request.Streat3,
+                    IsVehiclePedestrian = request.IsVehiclePedestrian,
+                    IsVehicleProperty = request.IsVehicleProperty,
+                    IsVehicleVehicle=request.IsVehicleVehicle,
+                    Scale = request.Scale
+                };
+                //Table: Reprts
+                var Report = new Data.Entities.Report() {
+                    AuthorLicence = db.Drivers.Single(d => d.DriverNIC.Equals(currentUser)).LicenceId,
+                    Images = Images,    //Reference: Table Images
+                    Vehicles=Vehicles,  //Reference: Table Vehicles
+                    ReportMeta = ReportDetails, //Reference: Table ReportMeta
+                    Status = "Pending"
+                };
+                db.Reports.Add(Report); //Adding just Report will automatically insert the other tables that are refred through foreign references
+                db.SaveChanges();   //Saving changes to the database.
+            }
             return View();
         }
 
         public PartialViewResult NewVehicle() {
-            return PartialView();
-        }
-        [HttpPost]
-        public PartialViewResult NewVehicle(Vehicle vehicle) {
-            ViewBag.Added = true;
+            Session["VehicleCount"] = (int)Session["VehicleCount"] + 1;
             return PartialView();
         }
 
         public PartialViewResult NewImage() {
-
+            Session["PhotoCount"] = (int)Session["PhotoCount"] + 1;
             return PartialView();
         }
-
     }
 }

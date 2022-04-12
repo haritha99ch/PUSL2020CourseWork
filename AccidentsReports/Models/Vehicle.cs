@@ -18,8 +18,9 @@ namespace AccidentsReports.Models {
     public class Vehicle {
         [Required]
         [Display(Name ="Plate Number")]
-        public int PlateNumber { get; set; }
+        public string PlateNumber { get; set; }
         [Display(Name = "Model Name")]
+        [Required]
         public string? ModelName { get; set; }
         [Required]
         [Display(Name = "Vehicle Class")]

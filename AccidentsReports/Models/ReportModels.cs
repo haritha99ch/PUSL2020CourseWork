@@ -21,9 +21,18 @@ namespace AccidentsReports.Models {
         public long Author { get; set; }
         public DateTime DatetTime { get; set; }
         [Required]
-        public float Latitude { get; set; }
+        [StringLength(20)]
+        public string City { get; set; }
         [Required]
-        public float Longitude { get; set; }
+        [Range(0, 100, ErrorMessage = "Please Enter a valid number")]
+        public int No { get; set; }
+        [Required]
+        [StringLength(20)]
+        public string Streat1 { get; set; }
+        [StringLength(20)]
+        public string Streat2 { get; set; }
+        [StringLength(20)]
+        public string Streat3 { get; set; }
         [Required]
         public Cause Cause { get; set; }
         [Required]
@@ -38,10 +47,13 @@ namespace AccidentsReports.Models {
         [Required]
         public List<Vehicle> Vehicles { get; set; }
         [Required]
+        [Display(Name = "Vehicle With Vehicle")]
         public bool IsVehicleVehicle { get; set; }
         [Required]
+        [Display(Name = "Vehicle With Property")]
         public bool IsVehicleProperty { get; set; }
         [Required]
+        [Display(Name = "Vehicle With Pedestrian")]
         public bool IsVehiclePedestrian { get; set; }
         public float Damage { get; set; }
         public long ApprovedBy { get; set; }
