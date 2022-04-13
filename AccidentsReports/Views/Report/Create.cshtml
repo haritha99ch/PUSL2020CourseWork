@@ -12,12 +12,6 @@
     @Html.AntiForgeryToken()
     <div class="new-report container">
         <div class="container">
-            <ul>
-                @foreach (var item in @ViewBag.list) {
-                    <li>@item</li>
-                }
-            </ul>
-
             @if (@ViewBag.Errors != null) {
                 <div class="alert alert-danger">
                     <ul>
@@ -155,7 +149,7 @@
                 <div class="col-4">
                     @Ajax.ActionLink(
                         "Add Vehicle",
-                        "NewVehicle",
+                        "_NewVehicle",
                         "Report",
                         new AjaxOptions {
                             UpdateTargetId = "newVehicle",
@@ -175,7 +169,7 @@
                 </div>
                 @Ajax.ActionLink(
                 "Add Photos",
-                "NewImage",
+                "_NewImage",
                 "Report",
                 new AjaxOptions {
                     UpdateTargetId = "newImage",

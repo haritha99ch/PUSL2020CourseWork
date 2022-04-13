@@ -40,6 +40,7 @@ namespace AccidentsReports.Controllers {
                 Session["IsInsurance"] = account.IsInsurance;
                 FormsAuthentication.SetAuthCookie(request.Email, false);
                 return Redirect(FormsAuthentication.GetRedirectUrl(request.Email, false));
+                return View();
             }
         }
     }

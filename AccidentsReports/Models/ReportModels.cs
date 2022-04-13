@@ -14,10 +14,12 @@ namespace AccidentsReports.Models {
         [Display(Name ="Bad Weather")]BadWeather
     }
 
-    public abstract class Report {
+    public class Report {
         public int Id { get; set; }
         [Required]
+        [StringLength(20)]
         public string Title { get; set; }
+        public string AuthorName { get; set; }
         public long Author { get; set; }
         public DateTime DatetTime { get; set; }
         [Required]
@@ -35,7 +37,10 @@ namespace AccidentsReports.Models {
         public string Streat3 { get; set; }
         [Required]
         public Cause Cause { get; set; }
+        public long? ApprovedBy { get; set; }
+
         [Required]
+        [StringLength(1000)]
         public string Description { get; set; }
         [Required]
         [Range(0, 5, ErrorMessage ="Scale is upto 5")]
@@ -56,7 +61,6 @@ namespace AccidentsReports.Models {
         [Display(Name = "Vehicle With Pedestrian")]
         public bool IsVehiclePedestrian { get; set; }
         public float Damage { get; set; }
-        public long ApprovedBy { get; set; }
         public long DamageEstimatedBy { get; set; }
         public long ClaimedBy { get; set; }
         public List<Image> Images { get; set; }

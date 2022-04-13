@@ -11,27 +11,29 @@ namespace AccidentsReports.Controllers {
     [Authorize]
     public class AccountController : Controller {
         // GET: Account
-        long CurrentUserId;
         string CurrentUserEmail;
         public ActionResult Index() {
-            CurrentUserId = 1234567890;
-            CurrentUserEmail = Session["CurrentUserEmail"].ToString();
-            bool isDriver = (bool)Session["IsDriver"];
-            bool isPolice = (bool)Session["IsPolice"];
-            bool isRDA = (bool)Session["IsRDA"];
-            bool isInsurance = (bool)Session["IsInsurance"];
-            if (isDriver) return RedirectToActionPermanent("Driver");
-            if (isPolice) return RedirectToAction("Police");
-            if (isRDA) return RedirectToAction("RDA");
-            if (isInsurance) return RedirectToAction("Insurance");
+            long CurrentUserId = 1234567890;
+            //CurrentUserEmail = Session["CurrentUserEmail"].ToString();
+            //bool isDriver = (bool)Session["IsDriver"];
+            //bool isPolice = (bool)Session["IsPolice"];
+            //bool isRDA = (bool)Session["IsRDA"];
+            //bool isInsurance = (bool)Session["IsInsurance"];
+            if (true) return Redirect("Driver");
+            //if (isPolice) return RedirectToAction("Police");
+            //if (isRDA) return RedirectToAction("RDA");
+            //if (isInsurance) return RedirectToAction("Insurance");
             return View();
         }
-        public new PartialViewResult User() {
+        public PartialViewResult _User() {
+            
             return PartialView();
         }
-
-        public ActionResult Driver() {
-            Driver User=null;
+        #region asd
+        
+          public ActionResult Driver() {
+            long CurrentUserId = (long)Session["CurrentUserID"];
+            Driver User = null;
             using (var db = new ARDbContext()) {
                 var getUser = db.Users
                     .Join(
@@ -54,6 +56,7 @@ namespace AccidentsReports.Controllers {
                         }
                     ).FirstOrDefault(u => u.user.NIC.Equals(CurrentUserId));
                 if (getUser != null) {
+                    string userEmail=Session["CurrentUserEmail"].ToString();
                     User = new Driver() {
                         NIC = getUser.user.NIC,
                         FirstName = getUser.user.FirstName,
@@ -63,6 +66,7 @@ namespace AccidentsReports.Controllers {
                         DOB = getUser.user.DOB,
                         PhoneNumber = getUser.user.PhoneNumber,
                         LicenceNumber = getUser.driver.LicenceId,
+                        ProfilePic=$"~/Content/images/{db.Accounts.Single(a => a.Email.Equals(userEmail)).ProfilePic}",
                         Email = getUser.account.Email
                     };
                 }
@@ -70,5 +74,10 @@ namespace AccidentsReports.Controllers {
 
             return View(User);
         }
+         
+        
+
+        #endregion
+
     }
 }

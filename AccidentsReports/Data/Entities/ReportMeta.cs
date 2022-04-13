@@ -38,10 +38,10 @@ namespace AccidentsReports.Data.Entities {
         [Required]
         public int Scale { get; set; }
         [Required]
-        [StringLength(500)]
+        [StringLength(1000)]
         public string Description { get; set; }
 
 
-
+       
     }
 }

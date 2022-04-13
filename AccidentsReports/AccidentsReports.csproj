@@ -171,6 +171,10 @@
     <Compile Include="Migrations\202204110927598_LocationUpdate.designer.cs">
       <DependentUpon>202204110927598_LocationUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202204130742379_StringLenth.cs" />
+    <Compile Include="Migrations\202204130742379_StringLenth.designer.cs">
+      <DependentUpon>202204130742379_StringLenth.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\202204070400296_User.cs" />
     <Compile Include="Migrations\202204070400296_User.designer.cs">
@@ -277,6 +281,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\fontawesome.css" />
+    <Content Include="Content\fontawesome.min.css" />
     <Content Include="Content\images\Defualt.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -303,8 +311,9 @@
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery-ui.structure.css" />
     <Content Include="Content\jquery-ui.theme.css" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\site.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -334,6 +343,11 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -366,12 +380,13 @@
     <Content Include="Views\SignIn\Index.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Driver.cshtml" />
-    <Content Include="Views\Account\User.cshtml" />
+    <Content Include="Views\Account\_User.cshtml" />
     <Content Include="Views\Report\Create.cshtml" />
-    <Content Include="Views\Report\NewVehicle_Bak.cshtml" />
-    <Content Include="Views\Report\NewImage.cshtml" />
-    <Content Include="Views\Report\NewVehicle.cshtml" />
-    <Content Include="Views\Report\TestImage.cshtml" />
+    <Content Include="Views\Report\_NewImage.cshtml" />
+    <Content Include="Views\Report\_NewVehicle.cshtml" />
+    <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Report\_ListItem.cshtml" />
+    <Content Include="Views\Report\Indesdfx.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -471,6 +486,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202204110927598_LocationUpdate.resx">
       <DependentUpon>202204110927598_LocationUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204130742379_StringLenth.resx">
+      <DependentUpon>202204130742379_StringLenth.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

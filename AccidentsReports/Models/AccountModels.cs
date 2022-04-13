@@ -18,6 +18,7 @@ namespace AccidentsReports.Models {
         [Display(Name ="Re-Enter Password")]
         [Compare("Password", ErrorMessage ="Passwords Did Not Match")]
         public string RePassword { get; set; }
+        public string ProfilePic { get; set; }
         public Image? Image { get; set; }
     }
 }
