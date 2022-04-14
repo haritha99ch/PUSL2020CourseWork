@@ -1,0 +1,211 @@
+﻿@model AccidentsReports.Models.ReportDetail
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@helper ModeratorOption() {
+    <div>
+        <label>Approve: </label>
+        <button onclick="location.href='@Html.Action("Approve", new {Model.Id})'">Approve</button>
+    </div>
+}
+
+@helper ApproveStatus() {
+    //Html.Action("GetPoliceDetails", new { id = Model.Id });
+
+    <div>
+        <label class="">Approved </label><i class="fa-solid fa-circle-check btn-outline-success"></i>
+        <small class="text-muted small">ApprovedBy</small>
+    </div>
+}
+
+
+<h2>Details</h2>
+
+@if (Model.ApprovedBy == null && (bool)Session["IsPolice"]) {
+    @ModeratorOption();
+}
+@if ((bool)Session["IsRDA"]) {
+
+}
+@if (Model.ApprovedBy != null) {
+    <div>
+        <label class="">Approved </label><i class="fa-solid fa-circle-check btn-outline-success"></i>
+        <small class="text-muted small">@ViewBag.ApprovedBy</small>
+        <small class="text-muted small">@ViewBag.ApprovedByDomain</small>
+    </div>
+}
+
+
+<div>
+    <h4>ReportDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AuthorName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AuthorName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DatetTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DatetTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.No)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.No)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Streat1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Streat1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Streat2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Streat2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Streat3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Streat3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApprovedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApprovedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Scale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Scale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImagePath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImagePath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsVehicleVehicle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsVehicleVehicle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsVehicleProperty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsVehicleProperty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsVehiclePedestrian)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsVehiclePedestrian)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Damage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Damage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DamageEstimatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DamageEstimatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClaimedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClaimedBy)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

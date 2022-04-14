@@ -49,8 +49,7 @@ namespace AccidentsReports.Models {
         public string Status { get; set; }
     }
     public class ReportDetail:Report {
-        [Required]
-        public List<Vehicle> Vehicles { get; set; }
+        public List<Vehicle>? Vehicles { get; set; }
         [Required]
         [Display(Name = "Vehicle With Vehicle")]
         public bool IsVehicleVehicle { get; set; }

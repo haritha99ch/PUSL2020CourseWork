@@ -11,15 +11,15 @@ namespace AccidentsReports.Controllers {
     [Authorize]
     public class AccountController : Controller {
         // GET: Account
-        string CurrentUserEmail;
         public ActionResult Index() {
-            long CurrentUserId = 1234567890;
-            //CurrentUserEmail = Session["CurrentUserEmail"].ToString();
-            //bool isDriver = (bool)Session["IsDriver"];
-            //bool isPolice = (bool)Session["IsPolice"];
-            //bool isRDA = (bool)Session["IsRDA"];
-            //bool isInsurance = (bool)Session["IsInsurance"];
-            if (true) return Redirect("Driver");
+            long CurrentUserId = (long)Session["CurrentUserID"];
+            string CurrentUserEmail = Session["CurrentUserEmail"].ToString();
+            bool isDriver = (bool)Session["IsDriver"];
+            bool isPolice = (bool)Session["IsPolice"];
+            bool isRDA = (bool)Session["IsRDA"];
+            bool isInsurance = (bool)Session["IsInsurance"];
+            if (isDriver) return Redirect("Driver");
+            if (isPolice) return Redirect("Police");
             //if (isPolice) return RedirectToAction("Police");
             //if (isRDA) return RedirectToAction("RDA");
             //if (isInsurance) return RedirectToAction("Insurance");

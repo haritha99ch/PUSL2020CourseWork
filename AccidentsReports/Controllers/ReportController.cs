@@ -14,45 +14,57 @@ namespace AccidentsReports.Controllers {
     public class ReportController : Controller {
         long currentUser = 1234567890;
         // GET: Report
-        [AllowAnonymous]
         public ActionResult Index() {
+            bool IsDriver = false;
+            bool IsPolice = false;
+            bool IsRDA = false;
+            bool IsInsurance = false;
+            if (Session["CurrentUserID"] != null) { //To Avoid Anonymouse Null references
+                IsDriver = (bool)Session["IsDriver"];
+                IsPolice = (bool)Session["IsPolice"];
+                IsRDA = (bool)Session["IsRDA"];
+                IsInsurance = (bool)Session["IsInsurance"];
+            }
             List<ReportDetail> reportList = new List<ReportDetail>();
             List<List<string>> VehicleTypes = new List<List<string>>();
             using (var db = new ARDbContext()) {
-                var getReportList = db.Reports
+                var getReportList = db.Reports  //Getting posts reports with all the other tables related to it
                     .Include(r => r.ReportMeta)
                     .Include(r => r.Vehicles)
                     .Include(r => r.Images)
                     .ToList();
+                //Reading all the reports
                 foreach (var Report in getReportList) {
+                    if (Report.ApprovedBy != null || IsPolice) {
+                        ReportDetail reportDetail = new ReportDetail() {
+                            Id = Report.ReportId,
+                            Title = Report.ReportMeta.Title,
+                            ImagePath = $"~/Content/images/{db.Images.First(i => i.ReportId == Report.ReportId).ImagePath}",
+                            DatetTime = Report.ReportMeta.DateTime,
+                            ApprovedBy = Report.ApprovedBy,
+                            Description = Report.ReportMeta.Description,
+                            City = Report.ReportMeta.City,
+                            No = Report.ReportMeta.No,
+                            Streat1 = Report.ReportMeta.Street1,
+                            Streat2 = Report.ReportMeta.Street2,
+                            Streat3 = Report.ReportMeta.Street3,
+                            IsVehiclePedestrian = Report.ReportMeta.IsVehiclePedestrian,
+                            IsVehicleProperty = Report.ReportMeta.IsVehicleProperty,
+                            IsVehicleVehicle = Report.ReportMeta.IsVehicleVehicle,
+                            Cause = (Cause)Enum.Parse(typeof(Cause), Report.ReportMeta.Cause),
+                            Scale = Report.ReportMeta.Scale,
 
-                    ReportDetail reportDetail = new ReportDetail() {
-                        Id=Report.ReportId,
-                        Title = Report.ReportMeta.Title,
-                        ImagePath = $"~/Content/images/{db.Images.First(i => i.ReportId == Report.ReportId).ImagePath}",
-                        DatetTime = Report.ReportMeta.DateTime,
-                        ApprovedBy = Report.ApprovedBy,
-                        Description = Report.ReportMeta.Description,
-                        City = Report.ReportMeta.City,
-                        No = Report.ReportMeta.No,
-                        Streat1=Report.ReportMeta.Street1,
-                        Streat2=Report.ReportMeta.Street2,
-                        Streat3=Report.ReportMeta.Street3,
-                        IsVehiclePedestrian = Report.ReportMeta.IsVehiclePedestrian,
-                        IsVehicleProperty = Report.ReportMeta.IsVehicleProperty,
-                        IsVehicleVehicle = Report.ReportMeta.IsVehicleVehicle,
-                        Cause = (Cause)Enum.Parse(typeof(Cause), Report.ReportMeta.Cause),
-                        Scale = Report.ReportMeta.Scale,
-                    };
-                    long AuthorId = db.Drivers.FirstOrDefault(d => d.LicenceId.Equals(Report.AuthorLicence)).DriverNIC;
-                    var Names = db.Users.Where(u => u.NIC.Equals(AuthorId)).Select(u => new { u.FirstName, u.LastName });
-                    reportDetail.AuthorName = $"{Names.Select(u => u.FirstName).First()} {Names.Select(u => u.LastName).First()}";
-                    List<string> vehicleTypes= new List<string>();
-                    foreach (var vehicel in Report.Vehicles) {
-                        vehicleTypes.Add(vehicel.Class.ToString());
+                        };
+                        long AuthorId = db.Drivers.FirstOrDefault(d => d.LicenceId.Equals(Report.AuthorLicence)).DriverNIC;
+                        var Names = db.Users.Where(u => u.NIC.Equals(AuthorId)).Select(u => new { u.FirstName, u.LastName });
+                        reportDetail.AuthorName = $"{Names.Select(u => u.FirstName).First()} {Names.Select(u => u.LastName).First()}";
+                        List<string> vehicleTypes = new List<string>();
+                        foreach (var vehicel in Report.Vehicles) {
+                            vehicleTypes.Add(vehicel.Class.ToString());
+                        }
+                        VehicleTypes.Add(vehicleTypes);
+                        reportList.Add(reportDetail);
                     }
-                    VehicleTypes.Add(vehicleTypes);
-                    reportList.Add(reportDetail);
                 }
                 ViewBag.VehicleTypes = VehicleTypes;
                 return View(reportList);
@@ -60,10 +72,95 @@ namespace AccidentsReports.Controllers {
         }
 
         #region Item Details view
-        public ActionResult Details() {
+        public ActionResult Details(int id) {
+            bool IsDriver = false;
+            bool IsPolice = false;
+            bool IsRDA = false;
+            bool IsInsurance = false;
+            if (Session["CurrentUserID"] != null) { //To Avoid Anonymouse Null references
+                IsDriver = (bool)Session["IsDriver"];
+                IsPolice = (bool)Session["IsPolice"];
+                IsRDA = (bool)Session["IsRDA"];
+                IsInsurance = (bool)Session["IsInsurance"];
+            }
+            ReportDetail Report;
+            using (var db = new ARDbContext()) {
+                var getReport = db.Reports      
+                    .Include(r => r.ReportMeta)
+                    .Include(r => r.Vehicles)
+                    .Include(r => r.Images)
+                    .First(r => r.ReportId.Equals(id));
+                Report = new ReportDetail() {
+                    Id = getReport.ReportId,
+                    Title = getReport.ReportMeta.Title,
+                    DatetTime = getReport.ReportMeta.DateTime,
+                    ApprovedBy = getReport.ApprovedBy,
+                    Description = getReport.ReportMeta.Description,
+                    City = getReport.ReportMeta.City,
+                    No = getReport.ReportMeta.No,
+                    Streat1 = getReport.ReportMeta.Street1,
+                    Streat2 = getReport.ReportMeta.Street2,
+                    Streat3 = getReport.ReportMeta.Street3,
+                    IsVehiclePedestrian = getReport.ReportMeta.IsVehiclePedestrian,
+                    IsVehicleProperty = getReport.ReportMeta.IsVehicleProperty,
+                    IsVehicleVehicle = getReport.ReportMeta.IsVehicleVehicle,
+                    Cause = (Cause)Enum.Parse(typeof(Cause), getReport.ReportMeta.Cause),
+                    Scale = getReport.ReportMeta.Scale,
+                    Damage = getReport.Damage,
+                };
+                long AuthorId = db.Drivers.FirstOrDefault(d => d.LicenceId.Equals(getReport.AuthorLicence)).DriverNIC;
+                var Names = db.Users.Where(u => u.NIC.Equals(AuthorId)).Select(u => new { u.FirstName, u.LastName });
+                Report.AuthorName = $"{Names.Select(u => u.FirstName).First()} {Names.Select(u => u.LastName).First()}";
 
-            return View();
+                List<Vehicle> VehicleList = new List<Vehicle>();
+                foreach (var vehicle in getReport.Vehicles) {
+                    var Vehicle = new Vehicle() {
+                        PlateNumber = vehicle.PlateNumber,
+                        Class = (VehicleClass)Enum.Parse(typeof(VehicleClass), vehicle.Class),
+                        ModelName = vehicle.ModelName,
+                        LicenceNumber = vehicle.DriverLicence
+                    };
+                    VehicleList.Add(Vehicle);
+                }
+                Report.Vehicles = VehicleList;
+
+                List<Image> ImagesList = new List<Image>();
+                foreach (var image in getReport.Images) {
+                    var Image = new Image() {
+                        ImagePath = image.ImagePath
+                    };
+                    ImagesList.Add(Image);
+                }
+                Report.Images = ImagesList;
+                if (Report.ApprovedBy!=null) {
+                    string FullName;
+                    var Data = db.Polices
+                        .Where(p => p.PoliceId==Report.ApprovedBy)
+                        .Select(p => new {
+                            p.User.FirstName,
+                            p.User.LastName,
+                            p.PoliceDomain
+                        });
+                    FullName =$"{Data.First().FirstName} {Data.First().LastName}";
+                    ViewBag.ApprovedBy = FullName;
+                    ViewBag.ApprovedByDomain = Data.First().PoliceDomain;
+                }
+            }
+            return View(Report);
         }
+        public void Approve(int id) {
+            long UserId = (long)Session["CurrentUserID"];
+            long PoliceId;
+            using (var db = new ARDbContext()) {
+                PoliceId = db.Polices
+                    .FirstOrDefault(p => p.PoliceNIC.Equals(UserId)).PoliceId;
+                db.Reports
+                    .FirstOrDefault(r => r.ReportId.Equals(id))
+                    .ApprovedBy = PoliceId;
+                db.SaveChanges();
+            }
+        }
+
         #endregion
 
         #region ListContent

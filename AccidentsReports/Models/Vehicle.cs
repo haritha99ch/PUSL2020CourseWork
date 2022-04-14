@@ -26,6 +26,6 @@ namespace AccidentsReports.Models {
         [Display(Name = "Vehicle Class")]
         public VehicleClass Class { get; set; }
         [Display(Name = "Licence Number")]
-        public int? LicenceNumber { get; set; }
+        public long? LicenceNumber { get; set; }
     }
 }

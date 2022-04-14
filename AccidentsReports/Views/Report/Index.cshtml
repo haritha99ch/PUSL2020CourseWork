@@ -12,103 +12,101 @@
     <div class="container">
         <div class="Card-container">
             @foreach (var item in Model) {
-            <div class="card card-btn" onclick="location.href='@Url.Action("Details", new {id=item.Id})'">
-                <div class="card-body row overflow-hidden">
-                    <div class="col img-thumbnail" style="max-height:23vh;">
-                        <center><img class="" src="@Url.Content(item.ImagePath)" style="max-height:21vh;" /></center>
-                        <h6 class="mt-1">@item.City &nbsp;&nbsp;@item.No, &nbsp;@item.Streat1</h6>
-                    </div>
-                    <div class="col-4 rounded-3 img-thumbnail" style="max-height: 23vh;">
-                        <div class="row">
-                            <h3>
-                                @item.Title
-                                @if (item.ApprovedBy != 0) {
-
-
-                                    <small class="text-muted small">Approved </small><i class="fa-solid fa-circle-check btn-outline-success"></i>
-                                }
-                                else {
-                                    <small class="text-muted small">Pending </small>
-                                }
-                            </h3>
+                <div class="card card-btn" onclick="location.href='@Url.Action("Details", new {id=item.Id})'">
+                    <div class="card-body row overflow-hidden">
+                        <div class="col img-thumbnail" style="max-height:23vh;">
+                            <center><img class="" src="@Url.Content(item.ImagePath)" style="max-height:21vh;" /></center>
+                            <h6 class="mt-1">@item.City &nbsp;&nbsp;@item.No, &nbsp;@item.Streat1</h6>
                         </div>
-                        <h5 class="rounded-3 img-thumbnail">
-                            @item.AuthorName
-                            <small class="text-muted"> - @item.DatetTime</small>
-                        </h5>
-                        <div class="img-thumbnail overflow-hidden" style="max-height:14vh;">
-                            <p>@item.Description</p>
-
-                        </div>
-                    </div>
-                    <div class="col rounded-3 img-thumbnail align-content-end" style="max-height:24vh;">
-                        <div class="row">
-                            <div class="col">
-                                <label class="fs-5 fw-bolder">Category <i class="fa-solid fa-burst"></i></label>
-                            </div>
-                            <div class="col-7">
-                                <ul>
-                                    @if (item.IsVehicleVehicle) {
-                                        <li>Vehicle With Vehicle</li>
+                        <div class="col-4 rounded-3 img-thumbnail" style="max-height: 23vh;">
+                            <div class="row">
+                                <h3>
+                                    @item.Title
+                                    @if (item.ApprovedBy != null) {
+                                        <small class="text-muted small">Approved </small><i class="fa-solid fa-circle-check btn-outline-success"></i>
                                     }
-                                    @if (item.IsVehiclePedestrian) {
-                                        <li>Vehicle With Pedestrian</li>
+                                    else {
+                                        <small class="text-muted small">Pending </small>
                                     }
-                                    @if (item.IsVehicleProperty) {
-                                        <li>Vehicle With Property</li>
+                                </h3>
+                            </div>
+                            <h5 class="rounded-3 img-thumbnail">
+                                @item.AuthorName
+                                <small class="text-muted"> - @item.DatetTime</small>
+                            </h5>
+                            <div class="img-thumbnail overflow-hidden" style="max-height:14vh;">
+                                <p>@item.Description</p>
+
+                            </div>
+                        </div>
+                        <div class="col rounded-3 img-thumbnail align-content-end" style="max-height:24vh;">
+                            <div class="row">
+                                <div class="col">
+                                    <label class="fs-5 fw-bolder">Category <i class="fa-solid fa-burst"></i></label>
+                                </div>
+                                <div class="col-7">
+                                    <ul>
+                                        @if (item.IsVehicleVehicle) {
+                                            <li>Vehicle With Vehicle</li>
+                                        }
+                                        @if (item.IsVehiclePedestrian) {
+                                            <li>Vehicle With Pedestrian</li>
+                                        }
+                                        @if (item.IsVehicleProperty) {
+                                            <li>Vehicle With Property</li>
+                                        }
+                                    </ul>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label class="fs-5 fw-bolder">Cause  <i class="fa-solid fa-question"></i></label>
+                                </div>
+                                <div class="col-7">
+                                    <label>@item.Cause</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label class="fs-5 fw-bolder">Vehicles  <i class="fa-solid fa-car-burst"></i></label>
+                                </div>
+                                <div class="col-7">
+                                    @foreach (var type in @ViewBag.VehicleTypes[i]) {
+                                        <label>@type, </label>
                                     }
-                                </ul>
+                                </div>
+                            </div>
 
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label class="fs-5 fw-bolder">Cause  <i class="fa-solid fa-question"></i></label>
-                            </div>
-                            <div class="col-7">
-                                <label>@item.Cause</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label class="fs-5 fw-bolder">Vehicles  <i class="fa-solid fa-car-burst"></i></label>
-                            </div>
-                            <div class="col-7">
-                                @foreach (var type in @ViewBag.VehicleTypes[i]) {
-                                    <label>@type, </label>
-                                }
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-                                <label class="fs-5 fw-bolder">Claimed  <i class="fa-solid fa-check-to-slot"></i></label>
-                            </div>
-                            <divd class="col-7">
-                                @if (item.ClaimedBy != 0) {
+                            <div class="row">
+                                <div class="col">
+                                    <label class="fs-5 fw-bolder">Claimed  <i class="fa-solid fa-check-to-slot"></i></label>
+                                </div>
+                                <divd class="col-7">
+                                    @if (item.ClaimedBy != 0) {
 
 
-                                    <label>Claimed</label>
-                                }
-                                else {
-                                    <label>Waiting</label>
-                                }
-                            </divd>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label class="fs-5 fw-bolder">Scale  <i class="fa-solid fa-check-to-slot"></i></label>
+                                        <label>Claimed</label>
+                                    }
+                                    else {
+                                        <label>Waiting</label>
+                                    }
+                                </divd>
                             </div>
-                            <div class="col-7">
-                                <i class="fa-solid fa-car-burst"></i>
-                                <i class="fa-solid fa-person-falling"></i>
-                                <i class="fa-solid fa-person-falling-burst"></i>
-                                <i class="fa-solid fa-skull"></i>
+                            <div class="row">
+                                <div class="col">
+                                    <label class="fs-5 fw-bolder">Scale  <i class="fa-solid fa-check-to-slot"></i></label>
+                                </div>
+                                <div class="col-7">
+                                    <i class="fa-solid fa-car-burst"></i>
+                                    <i class="fa-solid fa-person-falling"></i>
+                                    <i class="fa-solid fa-person-falling-burst"></i>
+                                    <i class="fa-solid fa-skull"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
                 i++;
             }
         </div>
