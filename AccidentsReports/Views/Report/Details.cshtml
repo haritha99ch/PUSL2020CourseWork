@@ -8,16 +8,52 @@
 @helper ModeratorOption() {
     <div>
         <label>Approve: </label>
-        <button onclick="location.href='@Html.Action("Approve", new {Model.Id})'">Approve</button>
+        <button onclick="location.href='@Html.Action("Approve", new {id = Model.Id})'">Approve</button>
     </div>
 }
-
 @helper ApproveStatus() {
-    //Html.Action("GetPoliceDetails", new { id = Model.Id });
-
     <div>
         <label class="">Approved </label><i class="fa-solid fa-circle-check btn-outline-success"></i>
-        <small class="text-muted small">ApprovedBy</small>
+        <small class="text-muted small">@ViewBag.ApprovedBy</small>
+        <small class="text-muted small">@ViewBag.ApprovedByDomain</small>
+    </div>
+}
+@helper DamageEstimateOptions() {
+    using (Html.BeginForm("Estimate", "Report", new { Model.Id })) {
+        <div>
+            <label>Estimated Damage:</label>
+            <input type="number" name="damage" />
+            <input type="submit" value="Enstimate" />
+        </div>
+    }
+}
+@helper EstimateStatus() {
+    <div>
+        <label>Estimated by: </label>
+        <small class="text-muted small">@ViewBag.DamageEstimatedBy</small>
+        <small class="text-muted small">@ViewBag.DamageEstimatedByDomain</small>
+        <br />
+        @Html.LabelFor(model => model.Damage):
+        @Html.DisplayFor(model => model.Damage)
+    </div>
+}
+@helper ClaimingOptions() {
+
+    <div>
+        @if (Model.DamageEstimatedBy != null) {
+            <label>Claim: </label>
+            <button onclick="location.href='@Html.Action("Claim", new {id = Model.Id})'">Claim</button>
+        }
+        else {
+            <label>Pending for damage estimate...</label>
+        }
+    </div>
+}
+@helper ClaimStatus() {
+    <div>
+        <label>Estimated by: </label>
+        <small class="text-muted small">@ViewBag.ClaimedBy</small>
+        <small class="text-muted small">@ViewBag.ClaimedByCompany</small>
     </div>
 }
 
@@ -27,15 +63,20 @@
 @if (Model.ApprovedBy == null && (bool)Session["IsPolice"]) {
     @ModeratorOption();
 }
-@if ((bool)Session["IsRDA"]) {
-
-}
 @if (Model.ApprovedBy != null) {
-    <div>
-        <label class="">Approved </label><i class="fa-solid fa-circle-check btn-outline-success"></i>
-        <small class="text-muted small">@ViewBag.ApprovedBy</small>
-        <small class="text-muted small">@ViewBag.ApprovedByDomain</small>
-    </div>
+    @ApproveStatus();
+}
+@if (Model.DamageEstimatedBy == null && (bool)Session["IsRDA"]) {
+    @DamageEstimateOptions();
+}
+@if (Model.DamageEstimatedBy != null) {
+    @EstimateStatus();
+}
+@if (Model.ClaimedBy == null && (bool)Session["IsInsurance"]) {
+    @ClaimingOptions();
+}
+@if (Model.ClaimedBy != null) {
+    @ClaimStatus();
 }
 
 
