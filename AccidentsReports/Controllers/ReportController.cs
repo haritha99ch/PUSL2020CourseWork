@@ -14,6 +14,7 @@ namespace AccidentsReports.Controllers {
     public class ReportController : Controller {
         long currentUser = 1234567890;
         // GET: Report
+        #region Report Feed
         public ActionResult Index() {
             bool IsDriver = false;
             bool IsPolice = false;
@@ -70,8 +71,10 @@ namespace AccidentsReports.Controllers {
                 return View(reportList);
             }
         }
+        #endregion
 
         #region Item Details view
+        #region View logic
         public ActionResult Details(int id) {
             bool IsDriver = false;
             bool IsPolice = false;
@@ -85,7 +88,7 @@ namespace AccidentsReports.Controllers {
             }
             ReportDetail Report;
             using (var db = new ARDbContext()) {
-                var getReport = db.Reports      
+                var getReport = db.Reports
                     .Include(r => r.ReportMeta)
                     .Include(r => r.Vehicles)
                     .Include(r => r.Images)
@@ -95,6 +98,8 @@ namespace AccidentsReports.Controllers {
                     Title = getReport.ReportMeta.Title,
                     DatetTime = getReport.ReportMeta.DateTime,
                     ApprovedBy = getReport.ApprovedBy,
+                    DamageEstimatedBy=getReport.DamageEstimatedBy,
+                    ClaimedBy=getReport.CalimedBy,
                     Description = getReport.ReportMeta.Description,
                     City = getReport.ReportMeta.City,
                     No = getReport.ReportMeta.No,
@@ -132,27 +137,54 @@ namespace AccidentsReports.Controllers {
                     ImagesList.Add(Image);
                 }
                 Report.Images = ImagesList;
-                if (Report.ApprovedBy!=null) {
+                if (Report.ApprovedBy != null) {
                     string FullName;
                     var Data = db.Polices
-                        .Where(p => p.PoliceId==Report.ApprovedBy)
+                        .Where(p => p.PoliceId == Report.ApprovedBy)
                         .Select(p => new {
                             p.User.FirstName,
                             p.User.LastName,
                             p.PoliceDomain
                         });
-                    FullName =$"{Data.First().FirstName} {Data.First().LastName}";
+                    FullName = $"{Data.First().FirstName} {Data.First().LastName}";
                     ViewBag.ApprovedBy = FullName;
                     ViewBag.ApprovedByDomain = Data.First().PoliceDomain;
+                }
+                if (Report.DamageEstimatedBy!=null) {
+                    string FullName;
+                    var Data=db.RDAs
+                        .Where(r=>r.EmpId == Report.DamageEstimatedBy)
+                        .Select(r => new {
+                            r.User.FirstName,
+                            r.User.LastName,
+                            r.RDADomain
+                        });
+                    FullName = $"{Data.First().FirstName} {Data.First().LastName}";
+                    ViewBag.DamageEstimatedBy = FullName;
+                    ViewBag.DamageEstimatedByDomain = Data.First().RDADomain;
+                }
+                if (Report.ClaimedBy!=null) {
+                    string FullName;
+                    var Data=db.Insurances
+                        .Where(i=>i.EmpId == Report.ClaimedBy)
+                        .Select(i => new {
+                            i.User.FirstName,
+                            i.User.LastName,
+                            i.Company
+                        });
+                    FullName = $"{Data.First().FirstName} {Data.First().LastName}";
+                    ViewBag.ClaimedBy = FullName;
+                    ViewBag.ClaimedByCompany = Data.First().Company;
                 }
             }
             return View(Report);
         }
+        #endregion
+        #region Moderation Logics
         public void Approve(int id) {
             long UserId = (long)Session["CurrentUserID"];
-            long PoliceId;
             using (var db = new ARDbContext()) {
-                PoliceId = db.Polices
+                long PoliceId = db.Polices
                     .FirstOrDefault(p => p.PoliceNIC.Equals(UserId)).PoliceId;
                 db.Reports
                     .FirstOrDefault(r => r.ReportId.Equals(id))
@@ -160,7 +192,32 @@ namespace AccidentsReports.Controllers {
                 db.SaveChanges();
             }
         }
-
+        [HttpPost]
+        public ActionResult Estimate(int id, float? damage) {
+            long UserId = (long)Session["CurrentUserId"];
+            using (var db = new ARDbContext()) {
+                long RdaId = db.RDAs
+                    .FirstOrDefault(r => r.RDANIC.Equals(UserId)).EmpId;
+                var report = db.Reports
+                    .FirstOrDefault(r => r.ReportId.Equals(id));
+                report.DamageEstimatedBy = RdaId;
+                report.Damage = damage;
+                db.SaveChanges();
+            }
+            return RedirectToAction("Details", new {id});
+        }
+        public void Claim(int id) {
+            long UserId = (long)Session["CurrentUserId"];
+            using(var db = new ARDbContext()) {
+                long InsuranceId = db.Insurances
+                    .FirstOrDefault(i => i.InsuranceNIC.Equals(UserId)).EmpId;
+                db.Reports
+                    .FirstOrDefault(r=>r.ReportId.Equals(id))
+                    .CalimedBy = InsuranceId;
+                db.SaveChanges();
+            }
+        }
+        #endregion
         #endregion
 
         #region ListContent

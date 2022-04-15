@@ -59,9 +59,10 @@ namespace AccidentsReports.Models {
         [Required]
         [Display(Name = "Vehicle With Pedestrian")]
         public bool IsVehiclePedestrian { get; set; }
-        public float Damage { get; set; }
-        public long DamageEstimatedBy { get; set; }
-        public long ClaimedBy { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "Rs.{0:##,#.00}")]
+        public float? Damage { get; set; }
+        public long? DamageEstimatedBy { get; set; }
+        public long? ClaimedBy { get; set; }
         public List<Image> Images { get; set; }
     }
 }

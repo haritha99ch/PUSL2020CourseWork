@@ -175,6 +175,10 @@
     <Compile Include="Migrations\202204130742379_StringLenth.designer.cs">
       <DependentUpon>202204130742379_StringLenth.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202204150545433_DamgeAllowNull.cs" />
+    <Compile Include="Migrations\202204150545433_DamgeAllowNull.designer.cs">
+      <DependentUpon>202204150545433_DamgeAllowNull.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\202204070400296_User.cs" />
     <Compile Include="Migrations\202204070400296_User.designer.cs">
@@ -490,6 +494,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202204130742379_StringLenth.resx">
       <DependentUpon>202204130742379_StringLenth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204150545433_DamgeAllowNull.resx">
+      <DependentUpon>202204150545433_DamgeAllowNull.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

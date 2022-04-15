@@ -14,7 +14,7 @@ namespace AccidentsReports.Data.Entities {
         public long? ApprovedBy { get; set; }
         public string Status { get; set; }
         public long? DamageEstimatedBy { get; set; }
-        public float Damage { get; set; }
+        public float? Damage { get; set; }
         public long? CalimedBy { get; set; }
 
 
