@@ -1,0 +1,40 @@
+﻿@model AccidentsReports.Models.RDA
+
+@{
+    ViewBag.Title = "RDA";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>RDA</h2>
+
+<div class="row">
+    <div class="col-4 position-fixed bg-light h-100">
+        <h2>Police</h2>
+        @{
+            Html.RenderPartial("_User");
+        }
+        <h4>RDA</h4>
+        <div class="row">
+            <div class="col-auto">
+                @Html.LabelFor(model => model.EmployeeId, new { @class = "form-label" })
+            </div>
+            <div class="col-auto">
+                @Html.DisplayFor(model => model.EmployeeId)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-auto">
+                @Html.LabelFor(model => model.Domain, new { @class = "form-label" })
+            </div>
+            <div class="col-auto">
+                @Html.DisplayFor(model => model.Domain)
+            </div>
+        </div>
+    </div>
+    <div class="col-4"></div>
+    <div class="col">
+        @{
+            //TODO: Html.RenderPartial("Reports", new { Model.NIC });
+        }
+    </div>
+</div>

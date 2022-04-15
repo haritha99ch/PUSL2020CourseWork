@@ -37,6 +37,7 @@ namespace AccidentsReports.Controllers {
                                 Email = request.Email,
                                 Password = request.Password,
                                 IsDriver = true,
+                                ProfilePic= "Default.png"
                             },
                         },
                         LicenceId = request.LicenceNumber
@@ -47,6 +48,7 @@ namespace AccidentsReports.Controllers {
             return View();
         }
         #endregion
+
         #region Police
         public ActionResult Police() {
             ViewBag.Errors = new List<string>();
@@ -73,6 +75,8 @@ namespace AccidentsReports.Controllers {
                                 Email= request.Email,
                                 Password=request.Password,
                                 IsPolice=true,
+                                ProfilePic = "Default.png"
+
                             }
                         },
                         PoliceId=request.PoliceId,
@@ -84,6 +88,7 @@ namespace AccidentsReports.Controllers {
             return View();
         }
         #endregion
+
         #region RDA
         public ActionResult RDA() {
             ViewBag.Errors = new List<string>();
@@ -110,6 +115,8 @@ namespace AccidentsReports.Controllers {
                                 Email = request.Email,
                                 Password = request.Password,
                                 IsRDA = true,
+                                ProfilePic = "Default.png"
+
                             }
                         },
                         EmpId = request.EmployeeId,
@@ -121,6 +128,7 @@ namespace AccidentsReports.Controllers {
             return View();
         }
         #endregion
+
         #region Insurance
         public ActionResult Insurance() {
             ViewBag.Errors = new List<string>();
@@ -147,6 +155,8 @@ namespace AccidentsReports.Controllers {
                                 Email = request.Email,
                                 Password = request.Password,
                                 IsInsurance = true,
+                                ProfilePic = "Default.png"
+
                             }
                         },
                         EmpId = request.EmployeeId,

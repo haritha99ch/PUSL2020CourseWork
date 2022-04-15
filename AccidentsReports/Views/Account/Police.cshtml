@@ -1,0 +1,40 @@
+﻿@model AccidentsReports.Models.Police
+
+@{
+    ViewBag.Title = "Police";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Police</h2>
+
+<div class="row">
+    <div class="col-4 position-fixed bg-light h-100">
+        <h2>Account</h2>
+        @{
+            Html.RenderPartial("_User");
+        }
+        <h4>Police</h4>
+        <div class="row">
+            <div class="col-auto">
+                @Html.LabelFor(model => model.PoliceId, new { @class = "form-label" })
+            </div>
+            <div class="col-auto">
+                @Html.DisplayFor(model => model.PoliceId)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-auto">
+                @Html.LabelFor(model => model.Domain, new { @class = "form-label" })
+            </div>
+            <div class="col-auto">
+                @Html.DisplayFor(model => model.Domain)
+            </div>
+        </div>
+    </div>
+    <div class="col-4"></div>
+    <div class="col">
+        @{
+            //TODO: Html.RenderPartial("Reports", new { Model.NIC });
+        }
+    </div>
+</div>

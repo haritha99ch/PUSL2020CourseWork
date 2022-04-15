@@ -289,7 +289,7 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\fontawesome.css" />
     <Content Include="Content\fontawesome.min.css" />
-    <Content Include="Content\images\Defualt.png" />
+    <Content Include="Content\images\Default.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -392,6 +392,9 @@
     <Content Include="Views\Report\_ListItem.cshtml" />
     <Content Include="Views\Report\Indesdfx.cshtml" />
     <Content Include="Views\Report\Details.cshtml" />
+    <Content Include="Views\Account\Police.cshtml" />
+    <Content Include="Views\Account\RDA.cshtml" />
+    <Content Include="Views\Account\Insurance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
