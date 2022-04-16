@@ -12,7 +12,6 @@ using System.Web.Security;
 namespace AccidentsReports.Controllers {
     [Authorize]
     public class ReportController : Controller {
-        long currentUser = 1234567890;
         // GET: Report
         #region Report Feed
         public ActionResult Index() {

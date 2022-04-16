@@ -8,7 +8,7 @@ namespace AccidentsReports.Models {
 
     public enum Cause {
         Distraction,
-        Dunk,
+        Drunk,
         Dizzyness,
         [Display(Name ="High Speed")]HighSpeed,
         [Display(Name ="Bad Weather")]BadWeather

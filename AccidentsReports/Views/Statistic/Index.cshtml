@@ -1,0 +1,164 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*@{
+        var chart = new Chart(width: 600, height: 400)
+            .AddTitle("Vehicle Classes")
+            .AddSeries(
+                name: "Vehicle Classes",
+                xValue: ViewBag.xValues,
+                yValues: ViewBag.yValues
+            )
+            .Write();
+    }*@
+<script src="~/Scripts/Chart.js"></script>
+<div class="container-xxxl">
+    <div class="row charts-container">
+        <div class="chartContainer col-6  p-1">
+            <div class="card">
+                <canvas id="Cause"></canvas>
+            </div>
+        </div>
+        <div class="chartContainer col-6  p-1">
+            <div class="card">
+                <canvas id="Classes"></canvas>
+            </div>
+        </div>
+        <div class="chartContainer col-6  p-1">
+            <div class="card">
+                <canvas id="WeeklyCount"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const ctx = document.getElementById('Cause').getContext('2d');
+    const CauseChart = new Chart(ctx, {
+        type: 'polarArea',
+        data: {
+            labels: @Html.Raw(Json.Encode(ViewBag.xCause)),
+            datasets: [{
+                label: 'Accidents Causes',
+                data: @Html.Raw(Json.Encode(ViewBag.yCause)),
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            maintainAspectRation: false,
+            scale: {
+                ticks: {
+                    precision:0
+                }
+            }
+
+        }
+    });
+
+    const ctx1 = document.getElementById('Classes').getContext('2d');
+    const classes = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: @Html.Raw(Json.Encode(ViewBag.xClass)),
+            datasets: [{
+                label: 'Number of vehicles by classes',
+                data: @Html.Raw(Json.Encode(ViewBag.yClass)),
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            maintainAspectRation: false,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        precision: 0
+                    }
+                }]
+            }
+        }
+    });
+
+    const ctx2 = document.getElementById('WeeklyCount').getContext('2d');
+    const DailyAccidents = new Chart(ctx2, {
+        type: 'line',
+        data: {
+            labels: @Html.Raw(Json.Encode(ViewBag.xWeeklyCount)),
+            datasets: [{
+                label: 'Weekly Reports',
+                data: @Html.Raw(Json.Encode(ViewBag.yWeeklyCount)),
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            maintainAspectRation: false,
+            /*bezierCurve: false,*/
+            elements: {
+                line: {
+                    tension:0
+                }
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        precision: 0
+                    }
+                }]
+            }
+        }
+    });
+
+</script>
+
+
+
