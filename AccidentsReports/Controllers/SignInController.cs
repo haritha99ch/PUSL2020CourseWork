@@ -38,10 +38,16 @@ namespace AccidentsReports.Controllers {
                 Session["IsPolice"] = account.IsPolice;
                 Session["IsRDA"] = account.IsRDA;
                 Session["IsInsurance"] = account.IsInsurance;
+                Session["ProfilePicture"] = $"~/Content/images/{db.Accounts.Single(a => a.Email.Equals(request.Email)).ProfilePic}";
                 FormsAuthentication.SetAuthCookie(request.Email, false);
                 return Redirect(FormsAuthentication.GetRedirectUrl(request.Email, false));
-                return View();
             }
+        }
+
+        public ActionResult SignOut() {
+            Session.Abandon();
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -5,7 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <div class="row">
     <div class="col-4 position-fixed bg-light h-100">
         <h2>Account</h2>
@@ -25,7 +24,7 @@
     <div class="col-4"></div>
     <div class="col">
        @{ 
-//TODO: Html.RenderPartial("Reports", new { Model.NIC });
+       Html.RenderPartial("_Reports", new { Model.LicenceNumber });
        }
     </div>
 </div>

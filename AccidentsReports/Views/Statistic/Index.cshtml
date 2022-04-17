@@ -4,16 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*@{
-        var chart = new Chart(width: 600, height: 400)
-            .AddTitle("Vehicle Classes")
-            .AddSeries(
-                name: "Vehicle Classes",
-                xValue: ViewBag.xValues,
-                yValues: ViewBag.yValues
-            )
-            .Write();
-    }*@
 <script src="~/Scripts/Chart.js"></script>
 <div class="container-xxxl">
     <div class="row charts-container">
@@ -35,7 +25,8 @@
     </div>
 </div>
 
-<script>
+<script type="text/javascript">
+    //REF: https://www.chartjs.org/docs/latest/
     const ctx = document.getElementById('Cause').getContext('2d');
     const CauseChart = new Chart(ctx, {
         type: 'polarArea',

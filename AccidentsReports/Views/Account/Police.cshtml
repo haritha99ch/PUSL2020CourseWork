@@ -34,7 +34,7 @@
     <div class="col-4"></div>
     <div class="col">
         @{
-            //TODO: Html.RenderPartial("Reports", new { Model.NIC });
+            Html.RenderPartial("_Reports", new { Model.PoliceId });
         }
     </div>
 </div>

@@ -14,33 +14,34 @@ namespace AccidentsReports.Models {
         [Obsolete]
         public ActionResult Index() {
             //var Causes = new List<Cause>();
-            var Causes = Enum.GetValues(typeof(Cause))
+            var Causes = Enum.GetValues(typeof(Cause))  //Createing a list from the custom enum
                 .Cast<Cause>()
                 .Select(c=>c.ToString())
                 .ToList();
-            var Classes = Enum.GetValues(typeof(VehicleClass))
+            var Classes = Enum.GetValues(typeof(VehicleClass))  //""
                 .Cast<VehicleClass>()
                 .Select(c => c.ToString())
                 .ToList();
-            var dates = Enumerable
+            var dates = Enumerable  //List of one week
                 .Range(0, 7)
                 .Select(i => DateTime.Now.AddDays(-7)
                 .AddDays(i))
                 .ToList();
-            var cause = new Dictionary<string, int>();
-            var WeeklyCount = new Dictionary<string, int>();
-            var vehicleClasses =new Dictionary<string, int>();
+            var cause = new Dictionary<string, int>();          //
+            var WeeklyCount = new Dictionary<string, int>();    //For Charts
+            var vehicleClasses =new Dictionary<string, int>();  //
             using (var db=new ARDbContext()) {
                 foreach (var Cause in Causes) {
                     var count = db.Reports
                         .Include(r=>r.ReportMeta)
-                        .Count(r => r.ReportMeta.Cause.Equals(Cause.ToString()) && r.ApprovedBy.HasValue);
+                        .Count(r => r.ReportMeta.Cause.Equals(Cause.ToString()) && r.ApprovedBy.HasValue);  
                     cause.Add(Cause, count);
                 }
                 foreach(var date in dates) {
                     var count=db.Reports
                         .Include(r=>r.ReportMeta)
                         .Count(r=>EntityFunctions.TruncateTime(r.ReportMeta.DateTime)==date.Date && r.ApprovedBy.HasValue);
+                        //Ref: https://stackoverflow.com/questions/34050664/best-way-to-compare-date-in-entity-framework
                     WeeklyCount.Add(date.Date.ToString("dd/M/yyyy"), count);
                 }
                 foreach (var Class in Classes) {
