@@ -131,7 +131,7 @@ namespace AccidentsReports.Controllers {
                 List<Image> ImagesList = new List<Image>();
                 foreach (var image in getReport.Images) {
                     var Image = new Image() {
-                        ImagePath = image.ImagePath
+                        ImagePath = $"~/Content/images/{image.ImagePath}"
                     };
                     ImagesList.Add(Image);
                 }

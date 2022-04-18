@@ -6,247 +6,149 @@
 }
 
 @helper ModeratorOption() {
-    <div>
-        <label>Approve: </label>
-        <button onclick="location.href='@Html.Action("Approve", new {id = Model.Id})'">Approve</button>
+    <div class="row">
+        <div class="col">
+            <label>Approve: </label>
+        </div>
+        <div class="col">
+            <button onclick="location.href='@Html.Action("Approve", new {id = Model.Id})'">Approve</button>
+        </div>
     </div>
 }
 @helper ApproveStatus() {
-    <div>
-        <label class="">Approved </label><i class="fa-solid fa-circle-check btn-outline-success"></i>
-        <small class="text-muted small">@ViewBag.ApprovedBy</small>
-        <small class="text-muted small">@ViewBag.ApprovedByDomain</small>
+    <div class="row">
+        <div class="col">
+            <label class="">Approved </label><i class="fa-solid fa-circle-check btn-outline-success"></i>
+        </div>
+        <div class="col">
+            <small class="text-muted small">@ViewBag.ApprovedBy</small>
+            <small class="text-muted small">@ViewBag.ApprovedByDomain</small>
+        </div>
     </div>
 }
 @helper DamageEstimateOptions() {
     using (Html.BeginForm("Estimate", "Report", new { Model.Id })) {
-        <div>
-            <label>Estimated Damage:</label>
-            <input type="number" name="damage" />
-            <input type="submit" value="Enstimate" />
+        <div class="row">
+            <div class="col">
+                <label>Estimated Damage:</label>
+            </div>
+            <div class="col">
+                <input type="number" name="damage" />
+                <input type="submit" value="Enstimate" />
+            </div>
         </div>
     }
 }
 @helper EstimateStatus() {
-    <div>
-        <label>Estimated by: </label>
-        <small class="text-muted small">@ViewBag.DamageEstimatedBy</small>
-        <small class="text-muted small">@ViewBag.DamageEstimatedByDomain</small>
-        <br />
-        @Html.LabelFor(model => model.Damage):
-        @Html.DisplayFor(model => model.Damage)
+    <div class="row">
+        <div class="col">
+            <label>Estimated by: </label>
+        </div>
+        <div class="col">
+            <small class="text-muted small">@ViewBag.DamageEstimatedBy</small><br />
+            <small class="text-muted small">@ViewBag.DamageEstimatedByDomain</small>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            @Html.LabelFor(model => model.Damage):
+        </div>
+        <div class="col">
+            @Html.DisplayFor(model => model.Damage)
+        </div>
     </div>
 }
 @helper ClaimingOptions() {
 
-    <div>
+    <div class="row">
         @if (Model.DamageEstimatedBy != null) {
-            <label>Claim: </label>
-            <button onclick="location.href='@Html.Action("Claim", new {id = Model.Id})'">Claim</button>
+            <div class="col">
+
+                <label>Claim: </label>
+            </div>
+            <div class="col">
+                <button onclick="location.href='@Html.Action("Claim", new {id = Model.Id})'">Claim</button>
+            </div>
         }
         else {
-            <label>Pending for damage estimate...</label>
+            <div class="">
+                <label>Pending for damage estimate...</label>
+            </div>
         }
     </div>
 }
 @helper ClaimStatus() {
-    <div>
-        <label>Estimated by: </label>
-        <small class="text-muted small">@ViewBag.ClaimedBy</small>
-        <small class="text-muted small">@ViewBag.ClaimedByCompany</small>
+    <div class="row">
+        <div class="col">
+            <label>Estimated by: </label>
+        </div>
+        <div class="col">
+            <small class="text-muted small">@ViewBag.ClaimedBy</small>
+            <small class="text-muted small">@ViewBag.ClaimedByCompany</small>
+        </div>
     </div>
 }
 
-
 <h2>Details</h2>
 
-@if (Model.ApprovedBy == null && (bool)Session["IsPolice"]) {
-    @ModeratorOption();
-}
-@if (Model.ApprovedBy != null) {
-    @ApproveStatus();
-}
-@if (Model.DamageEstimatedBy == null && (bool)Session["IsRDA"]) {
-    @DamageEstimateOptions();
-}
-@if (Model.DamageEstimatedBy != null) {
-    @EstimateStatus();
-}
-@if (Model.ClaimedBy == null && (bool)Session["IsInsurance"]) {
-    @ClaimingOptions();
-}
-@if (Model.ClaimedBy != null) {
-    @ClaimStatus();
-}
-
-
-<div>
-    <h4>ReportDetail</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
+<div class="container">
+    <div class="Title">
+        <div class="row fs-1">
             @Html.DisplayFor(model => model.Title)
-        </dd>
+        </div>
+        <div class="row text-muted">
+            @Html.DisplayFor(model=>model.AuthorName) - 
+            @Html.DisplayFor(model=>model.DatetTime)
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AuthorName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AuthorName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Author)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Author)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DatetTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DatetTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.City)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.No)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.No)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Streat1)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Streat1)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Streat2)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Streat2)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Streat3)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Streat3)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ApprovedBy)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ApprovedBy)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Scale)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Scale)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ImagePath)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ImagePath)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsVehicleVehicle)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsVehicleVehicle)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsVehicleProperty)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsVehicleProperty)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsVehiclePedestrian)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsVehiclePedestrian)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Damage)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Damage)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DamageEstimatedBy)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DamageEstimatedBy)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ClaimedBy)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ClaimedBy)
-        </dd>
-
-    </dl>
+    </div>
+    <div class="Location">
+        <div class="row">
+            @Html.DisplayFor(model=>model.City) - 
+            @Html.DisplayFor(model=>model.No)
+        </div>
+        <div class="row">
+            @Html.DisplayFor(model=>model.Streat1) ,
+            @Html.DisplayFor(model=>model.Streat2) , 
+            @Html.DisplayFor(model=>model.Streat3)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-9 p-1">
+            <div class="description h-auto mt-2 fs-5 ">
+                @Html.DisplayFor(model => model.Description)
+            </div>
+        </div>
+        <div class="col p-1">
+            <div class="status">
+                @if (Model.ApprovedBy == null && (bool)Session["IsPolice"]) {
+                    @ModeratorOption();
+                }
+                @if (Model.ApprovedBy != null) {
+                    @ApproveStatus();
+                }
+                @if (Model.DamageEstimatedBy == null && (bool)Session["IsRDA"]) {
+                    @DamageEstimateOptions();
+                }
+                @if (Model.DamageEstimatedBy != null) {
+                    @EstimateStatus();
+                }
+                @if (Model.ClaimedBy == null && (bool)Session["IsInsurance"]) {
+                    @ClaimingOptions();
+                }
+                @if (Model.ClaimedBy != null) {
+                    @ClaimStatus();
+                }
+            </div>
+        </div>
+        <div class="row photo-container">
+            @foreach (var image in Model.Images) {
+                <div class="col-4 p-1">
+                    <div class="card">
+                        <img src="@Url.Content(image.ImagePath)" class="img-thumbnail" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
