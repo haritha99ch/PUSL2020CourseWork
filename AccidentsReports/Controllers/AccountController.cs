@@ -36,45 +36,29 @@ namespace AccidentsReports.Controllers {
             long profileId = 0;
             Police User = null;
             using (var db = new ARDbContext()) {
-                var getUser = db.Users
-                    .Join(
-                        db.Polices,
-                        u => u.NIC,
-                        d => d.PoliceNIC,
-                        (u, d) => new {
-                            u,
-                            d,
-                        }
-                    )
-                    .Join(
-                        db.Accounts,
-                        ud => ud.u.AccountEmail,
-                        a => a.Email,
-                        (ud, a) => new {
-                            account = a,
-                            user = ud.u,
-                            police = ud.d,
-                        }
-                    ).FirstOrDefault(u => u.user.NIC.Equals(CurrentUserId));
-                if (getUser != null) {
+                var getPolice=db.Polices
+                    .Include(p=>p.User)
+                    .Include(p=>p.User.Account)
+                    .FirstOrDefault(p => p.User.NIC.Equals(CurrentUserId));
+                if (getPolice != null) {
                     string userEmail = Session["CurrentUserEmail"].ToString();
                     User = new Police() {
-                        NIC = getUser.user.NIC,
-                        FirstName = getUser.user.FirstName,
-                        LastName = getUser.user.LastName,
-                        Gender = (Gender)Enum.Parse(typeof(Gender), getUser.user.Gender.ToString()),
-                        Address = getUser.user.Address,
-                        DOB = getUser.user.DOB,
-                        PhoneNumber = getUser.user.PhoneNumber,
-                        PoliceId = getUser.police.PoliceId,
-                        Domain = getUser.police.PoliceDomain,
+                        NIC = getPolice.User.NIC,
+                        FirstName = getPolice.User.FirstName,
+                        LastName = getPolice.User.LastName,
+                        Gender = (Gender)Enum.Parse(typeof(Gender), getPolice.User.Gender.ToString()),
+                        Address = getPolice.User.Address,
+                        DOB = getPolice.User.DOB,
+                        PhoneNumber = getPolice.User.PhoneNumber,
+                        PoliceId = getPolice.PoliceId,
+                        Domain = getPolice.PoliceDomain,
                         ProfilePic = $"~/Content/images/{db.Accounts.Single(a => a.Email.Equals(userEmail)).ProfilePic}",
-                        Email = getUser.account.Email
+                        Email = getPolice.User.Account.Email
                     };
                     profileId = User.PoliceId;
                 }
             }
-            ViewBag.List = GetReports(profileId);
+            ViewBag.List = GetReports(CurrentUserId);
             return View(User);
         }
         #endregion
@@ -234,7 +218,7 @@ namespace AccidentsReports.Controllers {
                     .Include(r => r.ReportMeta)
                     .Include(r => r.Vehicles)
                     .Include(r => r.Images)
-                    .Where(r => r.AuthorLicence.Equals(id) || r.ApprovedBy==id || r.DamageEstimatedBy==id || r.CalimedBy==id)
+                    .Where(r => r.Driver==db.Drivers.FirstOrDefault(d=>d.DriverNIC.Equals(id)) || r.Police== db.Polices.FirstOrDefault(d => d.PoliceNIC.Equals(id)) || r.RDA== db.RDAs.FirstOrDefault(d => d.RDANIC.Equals(id)) || r.Insurance== db.Insurances.FirstOrDefault(d => d.InsuranceNIC.Equals(id)))
                     .ToList();
                 //Reading all the reports
                 foreach (var Report in getReportList) {
