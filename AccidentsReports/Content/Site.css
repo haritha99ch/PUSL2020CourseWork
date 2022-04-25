@@ -103,3 +103,51 @@ canvas {
     width:80%;
 }
 
+.agileits_w3layouts {
+    background: url('images/bg2.jpg');
+    background-size:cover;
+    height:90vh;
+}
+.wrap {
+    padding: 2.3em;
+    width: 37%;
+    margin: 2em auto;
+    background: rgba(1, 14, 21, 0.62);
+}
+
+.agile_form ul {
+    list-style-type: none;
+}
+
+.wrap h3{
+    color:white;
+}
+
+.wrap .form-label {
+    color: rgb(51, 146, 255);
+}
+.wrap textarea {
+    min-height: 4em;
+    height: 10em;
+    color: white;
+    width: 100%;
+    background: rgba(25, 5, 20, 0.48);
+    font-size: 0.85em;
+}
+
+.wrap input[type="text"] {
+    background: rgba(25, 5, 20, 0.48);
+    width:100%;
+    color:white;
+    font-size: 0.85em;
+}
+
+.agile_info_select {
+    color: #f5e7cc;
+    position: relative;
+}
+
+        .agile_form ul li input[type=radio] {
+            position: absolute;
+            visibility: hidden;
+        }
