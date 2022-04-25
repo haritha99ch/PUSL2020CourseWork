@@ -49,5 +49,10 @@ namespace AccidentsReports.Controllers {
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
+
+        public ActionResult ForgotPassword() {
+            return View();
+        }
+
     }
 }

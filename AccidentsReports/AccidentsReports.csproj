@@ -422,6 +422,7 @@
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Account\_Reports.cshtml" />
     <Content Include="Views\AboutUs\Index.cshtml" />
+    <Content Include="Views\SignIn\ForgotPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
