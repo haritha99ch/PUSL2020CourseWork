@@ -11,7 +11,8 @@ namespace AccidentsReports.Models {
         Drunk,
         Dizzyness,
         [Display(Name ="High Speed")]HighSpeed,
-        [Display(Name ="Bad Weather")]BadWeather
+        [Display(Name ="Bad Weather")]BadWeather,
+        [Display(Name ="Traffic Light Error")]TrafficLightsError
     }
 
     public class Report {

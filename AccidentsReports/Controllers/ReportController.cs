@@ -32,6 +32,7 @@ namespace AccidentsReports.Controllers {
                     .Include(r => r.ReportMeta)
                     .Include(r => r.Vehicles)
                     .Include(r => r.Images)
+                    .OrderByDescending(r=>r.ReportMeta.DateTime)
                     .ToList();
                 //Reading all the reports
                 foreach (var Report in getReportList) {
@@ -42,6 +43,7 @@ namespace AccidentsReports.Controllers {
                             ImagePath = $"~/Content/images/{db.Images.First(i => i.ReportId == Report.ReportId).ImagePath}",
                             DatetTime = Report.ReportMeta.DateTime,
                             ApprovedBy = Report.ApprovedBy,
+                            ClaimedBy=Report.CalimedBy,
                             Description = Report.ReportMeta.Description,
                             City = Report.ReportMeta.City,
                             No = Report.ReportMeta.No,
@@ -310,7 +312,7 @@ namespace AccidentsReports.Controllers {
                 db.Reports.Add(Report); //Adding just Report will automatically insert the other tables that are refred through foreign references
                 db.SaveChanges();   //Saving changes to the database.
             }
-            return View();
+            return RedirectToAction("Index");
         }
 
         public PartialViewResult _NewVehicle() {

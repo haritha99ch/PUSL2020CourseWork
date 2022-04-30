@@ -422,6 +422,7 @@
     <Content Include="Views\Account\_Reports.cshtml" />
     <Content Include="Views\Home\AboutUs.cshtml" />
     <Content Include="Views\SignIn\ForgotPassword.cshtml" />
+    <Content Include="Views\Home\PostFeedBack.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

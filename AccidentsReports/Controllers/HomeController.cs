@@ -12,6 +12,15 @@ namespace AccidentsReports.Controllers {
             return View();
         }
         public ActionResult AboutUs() {
+            ViewBag.Posted = false;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AboutUs(AboutUs request) {
+            return RedirectToAction("PostFeedBack");
+            return View();
+        }
+        public ActionResult PostFeedBack() {
             return View();
         }
     }
