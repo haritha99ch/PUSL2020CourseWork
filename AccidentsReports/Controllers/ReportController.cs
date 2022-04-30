@@ -231,6 +231,7 @@ namespace AccidentsReports.Controllers {
         public ActionResult Create() {
             return View();
         }
+
         [HttpPost]
         public ActionResult Create(ReportDetail request) {
             long currentUser = (long)Session["CurrentUserID"];
