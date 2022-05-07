@@ -5,12 +5,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Insurance</h2>
+
+<div class="position-fixed">
+    <div>
+        <button class="btn btn-outline-primary btn-lg" onclick="location.href='@Url.Action("Driver", "SignUp")'">Driver</button>
+        <button class="btn btn-outline-primary btn-lg" onclick="location.href='@Url.Action("RDA", "SignUp")'">RDA</button>
+        <button class="btn btn-outline-primary btn-lg" onclick="location.href='@Url.Action("Police", "SignUp")'">Police</button>
+    </div>
+</div>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
 
     <div class="container ">
+        <h2>Insurance</h2>
         @if (ViewBag.Errors.Count > 0) {
             <div class="alert alert-danger">
                 <ul>

@@ -5,13 +5,20 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="position-fixed">
+    <div>
+        <button class="btn btn-outline-primary btn-lg" onclick="location.href='@Url.Action("Police", "SignUp")'">Police</button>
+        <button class="btn btn-outline-primary btn-lg" onclick="location.href='@Url.Action("RDA", "SignUp")'">RDA</button>
+        <button class="btn btn-outline-primary btn-lg" onclick="location.href='@Url.Action("Insurance", "SignUp")'">Insurance</button>
+    </div>
+</div>
 
-<h2>Index</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
 
-    <div class="container form-sign-up">
+    <div class="container">
+        <h2>Driver</h2>
         @if (ViewBag.Errors.Count > 0) {
             <div class="alert alert-danger">
                 <ul>

@@ -45,7 +45,7 @@ namespace AccidentsReports.Controllers {
                 );
                 db.SaveChanges();
             }
-            return View();
+            return RedirectToAction("Index", "Home");
         }
         #endregion
 
@@ -85,7 +85,7 @@ namespace AccidentsReports.Controllers {
                 );
                 db.SaveChanges();
             }
-            return View();
+            return RedirectToAction("Index", "Home");
         }
         #endregion
 
@@ -125,7 +125,7 @@ namespace AccidentsReports.Controllers {
                 );
                 db.SaveChanges();
             }
-            return View();
+            return RedirectToAction("Index", "Home");
         }
         #endregion
 
@@ -165,7 +165,7 @@ namespace AccidentsReports.Controllers {
                 );
                 db.SaveChanges();
             }
-            return View();
+            return RedirectToAction("Index", "Home");
         }
         #endregion
 
