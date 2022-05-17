@@ -4,5 +4,48 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Accidents Reporting Services </h2>
+<div id="Home">
+    <div class="container home-landing">
+        <div class="row">
+            <h1>Accident Reporting Service</h1>
+            <label>By Sri Lanka Police And Road Development Authority</label>
+        </div>
+        <div class="row">
+            <h2>Our Vision</h2>
+            <p> The Road Development Authority and The Police Of Sri Lanka with The collaboration of Sri Lankan Insurance Company Has Launch a Web Site To Report Accidents Happening Across. The Goal Is to Be Effective On Managing the Needs in Accidents</p>
+        </div>
+        <div class="p-4">
+            <button class="btn btn-primary btn-lg" onclick="location.href='@Url.Action("Driver", "SignUp")'">Be A Reporter</button>
+            <button class="btn btn-outline-primary btn-lg" onclick="location.href='@Url.Action("Index", "Report")'">Report</button>
+        </div>
+    </div>
+    <footer class="bg-light text-center text-lg-start">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 mb-md-0">
+                    <h5 class="text-uppercase">Sri Lanka Police</h5>
+                    <ul>
+                        <li>Hot Line: 011-345 34</li>
+                        <li>Hot Line: 011-345 34</li>
+                        <li>Hot Line: 011-345 34</li>
+                    </ul>
+                </div>
+                <!--Grid column-->
+                <!--Grid column-->
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Road Development Authority Sri Lanka</h5>
+                    <ul>
+                        <li>Hot Line: 011-345 34</li>
+                        <li>Hot Line: 011-345 34</li>
+                        <li>Hot Line: 011-345 34</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2020 Copyright:
+            <a class="text-dark" href="http://www.rda.gov.lk/">rda.gov.lk</a>
+        </div>
+    </footer>
+</div>
 

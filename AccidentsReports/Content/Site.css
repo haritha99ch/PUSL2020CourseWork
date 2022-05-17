@@ -1,5 +1,46 @@
-﻿
+﻿#Home {
+    background-image: url('images/Home_bg.jpg');
+    background-repeat:no-repeat;
+    background-size:cover;
+    height: 94vh;
+}
 
+.home-landing{
+    background-color:#00000084;
+    height:77vh;
+}
+
+#Home footer {
+    bottom: 0;
+    left: 0;
+}
+
+#Home h1{
+    margin-top:100px;
+    color:white;
+    font-size:100px;
+    text-align:center
+}
+
+#Home h2 {
+    margin-top: 100px;
+    color: white;
+    font-size: 75px;
+    margin-left: 40px;
+}
+
+.home-landing p {
+    color: white;
+    margin-left: 40px;
+    font-size: 20px;
+}
+
+
+.home-landing label {
+    color: gold;
+    margin-left: 40px;
+    font-size:30px;
+}
 
 .btn-signin {
     width: 300px;
